@@ -90,12 +90,6 @@ import {
   DPAPage,
   SubprocessorsPage,
   // standalone
-  SlidesPreviewPage,
-  SlidesFilePreviewPage,
-  DocumentPreviewPage,
-  WeeklyRecapPage,
-  PublicStatusPage,
-  SePage,
 } from "./lazyPages";
 
 const toChat = <Navigate to="/chat" replace />;
