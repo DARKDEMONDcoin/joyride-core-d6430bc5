@@ -31,15 +31,6 @@ registerRoute(/^\/referrals\/resources$/, () => import("@/pages/billing/Referral
 
 // -- Marketing / SEO -------------------------------------------------------
 registerRoute(/^\/pricing$/, () => import("@/pages/marketing/PricingPage"));
-registerRoute(/^\/ai-chat/, () => import("@/pages/marketing/AIChatLandingPage"));
-registerRoute(/^\/models\/[^/]+$/, () => import("@/pages/marketing/ModelDetailPage"));
-registerRoute(/^\/features/, () => import("@/pages/marketing/FeaturesGuidePage"));
-registerRoute(/^\/contact$/, () => import("@/pages/marketing/ContactPage"));
-registerRoute(/^\/egypt$/, () => import("@/pages/marketing/EgyptPage"));
-registerRoute(/^\/terms$/, () => import("@/pages/marketing/TermsPage"));
-registerRoute(/^\/privacy$/, () => import("@/pages/marketing/PrivacyPage"));
-registerRoute(/^\/refund$/, () => import("@/pages/marketing/RefundPage"));
-registerRoute(/^\/cookies$/, () => import("@/pages/marketing/CookiePolicyPage"));
 
 // -- Integrations ----------------------------------------------------------
 registerRoute(/^\/integrations$/, () => import("@/pages/integrations/IntegrationsPage"));
