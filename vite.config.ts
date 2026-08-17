@@ -242,9 +242,14 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
+      // Side-effect-only Node stream imports coming from @tanstack/react-start
+      // must never reach the browser as bare `node:` specifiers.
+      "node:stream/web": path.resolve(__dirname, "./src/lib/node-stream-browser-stub.ts"),
+      "node:stream": path.resolve(__dirname, "./src/lib/node-stream-browser-stub.ts"),
       "#tanstack-router-entry": path.resolve(__dirname, "./src/lib/tanstack-router-entry-stub.ts"),
       "#tanstack-start-entry": path.resolve(__dirname, "./src/lib/tanstack-router-entry-stub.ts"),
       "tanstack-start-manifest:v": path.resolve(__dirname, "./src/lib/tanstack-start-manifest-stub.ts"),
+
     },
   },
   optimizeDeps: {
@@ -315,7 +320,13 @@ export default defineConfig({
     // Each lazy route now fetches its own chunks strictly on demand.
     modulePreload: false,
     rollupOptions: {
-      external: [/^npm:/, /^https?:\/\//, /^jsr:/, /^node:/],
+      // `node:stream*` must NOT be external for the browser bundle: leaving
+      // those specifiers untouched made the published app try to fetch
+      // `node:stream` and render a blank page. They are aliased to an empty
+      // stub instead. Other `node:*` builtins stay external.
+      external: (id: string) =>
+        /^(npm:|https?:\/\/|jsr:)/.test(id) ||
+        (id.startsWith("node:") && !id.startsWith("node:stream")),
       output: {
         // Keep only the truly universal runtime packages in a shared vendor
         // chunk. Everything else is left to Rollup's default splitter so that
