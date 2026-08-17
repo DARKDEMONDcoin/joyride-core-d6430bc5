@@ -211,17 +211,18 @@ export const AppRoutes = ({ currentUserId }: { currentUserId: string | null }) =
     <Route path="/settings/capabilities" element={<ProtectedRoute><CapabilitiesPage /></ProtectedRoute>} />
     <Route path="/settings/system-status" element={<ProtectedRoute><SystemStatusPage /></ProtectedRoute>} />
     <Route path="/settings/switch" element={<ProtectedRoute><SwitchAccountPage /></ProtectedRoute>} />
-    <Route path="/recap" element={<ProtectedRoute><WeeklyRecapPage /></ProtectedRoute>} />
 
     {/* ── Research previews ─────────────────────────────────── */}
     <Route path="/research/preview/new" element={<ProtectedRoute><ResearchPreviewPage /></ProtectedRoute>} />
     <Route path="/research/preview/:id" element={<ProtectedRoute><ResearchPreviewPage /></ProtectedRoute>} />
     <Route path="/research/share/:token" element={<ResearchPreviewPage />} />
 
-    {/* ── Documents & slides ────────────────────────────────── */}
-    <Route path="/slides/preview/:id" element={<SlidesPreviewPage />} />
-    <Route path="/slides/file-preview/:id" element={<SlidesFilePreviewPage />} />
-    <Route path="/document/:artifactId" element={<DocumentPreviewPage />} />
+    {/* ── Retired preview routes ────────────────────────────── */}
+    <Route path="/recap" element={<Navigate to="/chat" replace />} />
+    <Route path="/slides/preview/:id" element={<Navigate to="/chat" replace />} />
+    <Route path="/slides/file-preview/:id" element={<Navigate to="/chat" replace />} />
+    <Route path="/document/:artifactId" element={<Navigate to="/chat" replace />} />
+
 
     {/* ── Marketing ─────────────────────────────────────────── */}
     <Route path="/pricing" element={<PricingPage />} />
