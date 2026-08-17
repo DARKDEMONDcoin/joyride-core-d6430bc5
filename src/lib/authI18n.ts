@@ -15,6 +15,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { sanitizeErrorMessage } from "@/lib/sanitizeError";
+import { cachedJson } from "@/lib/persistentCache";
 
 export type AuthLang =
   | "en"
@@ -1202,9 +1203,13 @@ function ensureExactDict(lang: AuthLang): void {
   if (EXACT_TEXT_TRANSLATIONS || exactDictLoading) return;
   if (lang === "en") return; // English callers never need the dict
   if (typeof fetch !== "function") return;
-  exactDictLoading = fetch("/i18n/exact-text.json")
-    .then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
-    .then((data: { greetingPrefixes?: string[]; translations?: ExactDict }) => {
+  // First use downloads it once; later sessions read it from the local
+  // runtime cache (Cache Storage, since it exceeds the localStorage budget).
+  exactDictLoading = cachedJson<{ greetingPrefixes?: string[]; translations?: ExactDict }>(
+    "/i18n/exact-text.json",
+    { key: "i18n:exact-text" },
+  )
+    .then((data) => {
       EXACT_TEXT_TRANSLATIONS = data.translations ?? {};
       GREETING_PREFIXES = data.greetingPrefixes ?? [];
       // Wake any React subscribers so text re-renders in the target language.

@@ -194,12 +194,38 @@ export default defineConfig({
             },
           },
           {
-            urlPattern: ({ url, sameOrigin }) =>
-              sameOrigin && /\.(?:png|jpe?g|webp|avif|svg|gif|ico)$/i.test(url.pathname),
-            handler: "StaleWhileRevalidate",
+            // Images: first request downloads, every later one is served from
+            // the local cache without touching the network.
+            urlPattern: ({ url }) =>
+              /\.(?:png|jpe?g|webp|avif|svg|gif|ico)$/i.test(url.pathname),
+            handler: "CacheFirst",
             options: {
               cacheName: "img-assets",
-              expiration: { maxEntries: 200, maxAgeSeconds: 30 * 24 * 60 * 60 },
+              expiration: { maxEntries: 400, maxAgeSeconds: 90 * 24 * 60 * 60 },
+              cacheableResponse: { statuses: [0, 200] },
+            },
+          },
+          {
+            // Static JSON data (i18n dictionaries, template registries, etc.).
+            urlPattern: ({ url, sameOrigin }) =>
+              sameOrigin && /\.json$/i.test(url.pathname) && !url.pathname.includes("manifest"),
+            handler: "CacheFirst",
+            options: {
+              cacheName: "static-json",
+              expiration: { maxEntries: 120, maxAgeSeconds: 30 * 24 * 60 * 60 },
+            },
+          },
+          {
+            // Cross-origin fonts + stylesheets (Google Fonts) and CDN assets.
+            urlPattern: ({ url, sameOrigin }) =>
+              !sameOrigin &&
+              (/fonts\.(?:googleapis|gstatic)\.com$/.test(url.hostname) ||
+                url.pathname.startsWith("/__l5e/assets-v1/")),
+            handler: "CacheFirst",
+            options: {
+              cacheName: "external-assets",
+              expiration: { maxEntries: 120, maxAgeSeconds: 365 * 24 * 60 * 60 },
+              cacheableResponse: { statuses: [0, 200] },
             },
           },
           {
