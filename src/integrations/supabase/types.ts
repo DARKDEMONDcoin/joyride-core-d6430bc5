@@ -80,6 +80,182 @@ export type Database = {
         }
         Relationships: []
       }
+      affiliate_commissions: {
+        Row: {
+          affiliate_user_id: string
+          amount: number
+          created_at: string
+          id: string
+          order_id: string | null
+          status: string
+        }
+        Insert: {
+          affiliate_user_id: string
+          amount?: number
+          created_at?: string
+          id?: string
+          order_id?: string | null
+          status?: string
+        }
+        Update: {
+          affiliate_user_id?: string
+          amount?: number
+          created_at?: string
+          id?: string
+          order_id?: string | null
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "affiliate_commissions_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "shop_orders"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      affiliate_payouts: {
+        Row: {
+          account: string
+          amount: number
+          created_at: string
+          id: string
+          method: string
+          status: string
+          user_id: string
+        }
+        Insert: {
+          account: string
+          amount: number
+          created_at?: string
+          id?: string
+          method: string
+          status?: string
+          user_id: string
+        }
+        Update: {
+          account?: string
+          amount?: number
+          created_at?: string
+          id?: string
+          method?: string
+          status?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      affiliate_profiles: {
+        Row: {
+          balance: number
+          code: string
+          commission_rate: number
+          created_at: string
+          id: string
+          total_earned: number
+          user_id: string
+        }
+        Insert: {
+          balance?: number
+          code: string
+          commission_rate?: number
+          created_at?: string
+          id?: string
+          total_earned?: number
+          user_id: string
+        }
+        Update: {
+          balance?: number
+          code?: string
+          commission_rate?: number
+          created_at?: string
+          id?: string
+          total_earned?: number
+          user_id?: string
+        }
+        Relationships: []
+      }
+      affiliate_store_products: {
+        Row: {
+          created_at: string
+          id: string
+          is_active: boolean
+          price: number
+          product_id: string
+          store_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          price: number
+          product_id: string
+          store_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          price?: number
+          product_id?: string
+          store_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "affiliate_store_products_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "shop_products"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "affiliate_store_products_store_id_fkey"
+            columns: ["store_id"]
+            isOneToOne: false
+            referencedRelation: "affiliate_stores"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      affiliate_stores: {
+        Row: {
+          created_at: string
+          id: string
+          is_active: boolean
+          is_premium: boolean
+          logo_url: string | null
+          name: string
+          slug: string
+          tagline: string | null
+          theme: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          is_premium?: boolean
+          logo_url?: string | null
+          name: string
+          slug: string
+          tagline?: string | null
+          theme?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          is_premium?: boolean
+          logo_url?: string | null
+          name?: string
+          slug?: string
+          tagline?: string | null
+          theme?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       agent_evals: {
         Row: {
           created_at: string
@@ -761,6 +937,36 @@ export type Database = {
         }
         Relationships: []
       }
+      ai_generations: {
+        Row: {
+          created_at: string
+          id: string
+          kind: string
+          model: string
+          profile_id: string
+          prompt: string
+          url: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          kind: string
+          model: string
+          profile_id: string
+          prompt: string
+          url: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          kind?: string
+          model?: string
+          profile_id?: string
+          prompt?: string
+          url?: string
+        }
+        Relationships: []
+      }
       ai_personalization: {
         Row: {
           about: string | null
@@ -976,6 +1182,84 @@ export type Database = {
           project_id?: string
           prompt_tokens?: number
           user_id?: string | null
+        }
+        Relationships: []
+      }
+      ai_smart_offers: {
+        Row: {
+          bonus_pct: number
+          context: Json
+          created_at: string
+          cta: string
+          expires_at: string
+          focus: string
+          headline: string
+          id: string
+          message: string
+          telegram_id: number
+        }
+        Insert: {
+          bonus_pct?: number
+          context?: Json
+          created_at?: string
+          cta?: string
+          expires_at?: string
+          focus?: string
+          headline?: string
+          id?: string
+          message?: string
+          telegram_id: number
+        }
+        Update: {
+          bonus_pct?: number
+          context?: Json
+          created_at?: string
+          cta?: string
+          expires_at?: string
+          focus?: string
+          headline?: string
+          id?: string
+          message?: string
+          telegram_id?: number
+        }
+        Relationships: []
+      }
+      ai_subscriptions: {
+        Row: {
+          created_at: string
+          expires_at: string | null
+          id: string
+          images_used: number
+          period_start: string
+          plan: string
+          profile_id: string
+          status: string
+          updated_at: string
+          videos_used: number
+        }
+        Insert: {
+          created_at?: string
+          expires_at?: string | null
+          id?: string
+          images_used?: number
+          period_start?: string
+          plan?: string
+          profile_id: string
+          status?: string
+          updated_at?: string
+          videos_used?: number
+        }
+        Update: {
+          created_at?: string
+          expires_at?: string | null
+          id?: string
+          images_used?: number
+          period_start?: string
+          plan?: string
+          profile_id?: string
+          status?: string
+          updated_at?: string
+          videos_used?: number
         }
         Relationships: []
       }
@@ -1285,6 +1569,82 @@ export type Database = {
         }
         Relationships: []
       }
+      attacks: {
+        Row: {
+          attack_type: string
+          character_id: string | null
+          created_at: string
+          damage: number
+          id: string
+          is_killing_blow: boolean
+          package_key: string | null
+          ton_reward: number
+          user_id: string
+        }
+        Insert: {
+          attack_type?: string
+          character_id?: string | null
+          created_at?: string
+          damage?: number
+          id?: string
+          is_killing_blow?: boolean
+          package_key?: string | null
+          ton_reward?: number
+          user_id: string
+        }
+        Update: {
+          attack_type?: string
+          character_id?: string | null
+          created_at?: string
+          damage?: number
+          id?: string
+          is_killing_blow?: boolean
+          package_key?: string | null
+          ton_reward?: number
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "attacks_character_id_fkey"
+            columns: ["character_id"]
+            isOneToOne: false
+            referencedRelation: "characters"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      auto_notification_log: {
+        Row: {
+          created_at: string
+          last_sent_at: string
+          profile_id: string
+          topic: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          last_sent_at?: string
+          profile_id: string
+          topic?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          last_sent_at?: string
+          profile_id?: string
+          topic?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "auto_notification_log_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       background_jobs: {
         Row: {
           attempt: number
@@ -1370,6 +1730,42 @@ export type Database = {
           status_text?: string | null
           stream_text?: string
           tokens_used?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      battle_inventory: {
+        Row: {
+          category: string
+          created_at: string
+          id: string
+          package_key: string
+          package_name: string
+          quantity: number
+          total_purchased: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          category: string
+          created_at?: string
+          id?: string
+          package_key: string
+          package_name?: string
+          quantity?: number
+          total_purchased?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          id?: string
+          package_key?: string
+          package_name?: string
+          quantity?: number
+          total_purchased?: number
           updated_at?: string
           user_id?: string
         }
@@ -1628,6 +2024,346 @@ export type Database = {
           },
         ]
       }
+      bolt_battles: {
+        Row: {
+          character_a: string | null
+          character_b: string | null
+          created_at: string
+          hp_a: number
+          hp_b: number
+          id: string
+          max_hp_a: number
+          max_hp_b: number
+          player_a: number
+          player_b: number | null
+          stake: number
+          status: string
+          updated_at: string
+          winner: number | null
+        }
+        Insert: {
+          character_a?: string | null
+          character_b?: string | null
+          created_at?: string
+          hp_a?: number
+          hp_b?: number
+          id?: string
+          max_hp_a?: number
+          max_hp_b?: number
+          player_a: number
+          player_b?: number | null
+          stake?: number
+          status?: string
+          updated_at?: string
+          winner?: number | null
+        }
+        Update: {
+          character_a?: string | null
+          character_b?: string | null
+          created_at?: string
+          hp_a?: number
+          hp_b?: number
+          id?: string
+          max_hp_a?: number
+          max_hp_b?: number
+          player_a?: number
+          player_b?: number | null
+          stake?: number
+          status?: string
+          updated_at?: string
+          winner?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bolt_battles_character_a_fkey"
+            columns: ["character_a"]
+            isOneToOne: false
+            referencedRelation: "bolt_characters"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "bolt_battles_character_b_fkey"
+            columns: ["character_b"]
+            isOneToOne: false
+            referencedRelation: "bolt_characters"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      bolt_characters: {
+        Row: {
+          base_damage: number
+          base_hp: number
+          created_at: string
+          id: string
+          image_url: string | null
+          name: string
+          price_ton: number
+          rarity: string
+          slug: string
+          sort_order: number
+          tagline: string | null
+          upgrade_price_ton: number
+        }
+        Insert: {
+          base_damage?: number
+          base_hp?: number
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          name: string
+          price_ton?: number
+          rarity?: string
+          slug: string
+          sort_order?: number
+          tagline?: string | null
+          upgrade_price_ton?: number
+        }
+        Update: {
+          base_damage?: number
+          base_hp?: number
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          name?: string
+          price_ton?: number
+          rarity?: string
+          slug?: string
+          sort_order?: number
+          tagline?: string | null
+          upgrade_price_ton?: number
+        }
+        Relationships: []
+      }
+      bolt_payments: {
+        Row: {
+          amount_ton: number
+          boc: string | null
+          created_at: string
+          id: string
+          purpose: string
+          reference: string | null
+          status: string
+          telegram_id: number
+          wallet_address: string | null
+        }
+        Insert: {
+          amount_ton: number
+          boc?: string | null
+          created_at?: string
+          id?: string
+          purpose: string
+          reference?: string | null
+          status?: string
+          telegram_id: number
+          wallet_address?: string | null
+        }
+        Update: {
+          amount_ton?: number
+          boc?: string | null
+          created_at?: string
+          id?: string
+          purpose?: string
+          reference?: string | null
+          status?: string
+          telegram_id?: number
+          wallet_address?: string | null
+        }
+        Relationships: []
+      }
+      bolt_player_characters: {
+        Row: {
+          character_id: string
+          created_at: string
+          id: string
+          level: number
+          selected: boolean
+          telegram_id: number
+          updated_at: string
+        }
+        Insert: {
+          character_id: string
+          created_at?: string
+          id?: string
+          level?: number
+          selected?: boolean
+          telegram_id: number
+          updated_at?: string
+        }
+        Update: {
+          character_id?: string
+          created_at?: string
+          id?: string
+          level?: number
+          selected?: boolean
+          telegram_id?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bolt_player_characters_character_id_fkey"
+            columns: ["character_id"]
+            isOneToOne: false
+            referencedRelation: "bolt_characters"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      bolt_players: {
+        Row: {
+          balance: number
+          created_at: string
+          first_name: string | null
+          id: string
+          last_claim_at: string
+          losses: number
+          mine_multiplier: number
+          mining_started_at: string | null
+          photo_url: string | null
+          referral_code: string
+          referral_count: number
+          referred_by: number | null
+          telegram_id: number
+          updated_at: string
+          username: string | null
+          wallet_address: string | null
+          wins: number
+        }
+        Insert: {
+          balance?: number
+          created_at?: string
+          first_name?: string | null
+          id?: string
+          last_claim_at?: string
+          losses?: number
+          mine_multiplier?: number
+          mining_started_at?: string | null
+          photo_url?: string | null
+          referral_code?: string
+          referral_count?: number
+          referred_by?: number | null
+          telegram_id: number
+          updated_at?: string
+          username?: string | null
+          wallet_address?: string | null
+          wins?: number
+        }
+        Update: {
+          balance?: number
+          created_at?: string
+          first_name?: string | null
+          id?: string
+          last_claim_at?: string
+          losses?: number
+          mine_multiplier?: number
+          mining_started_at?: string | null
+          photo_url?: string | null
+          referral_code?: string
+          referral_count?: number
+          referred_by?: number | null
+          telegram_id?: number
+          updated_at?: string
+          username?: string | null
+          wallet_address?: string | null
+          wins?: number
+        }
+        Relationships: []
+      }
+      bolt_task_completions: {
+        Row: {
+          created_at: string
+          id: string
+          task_id: string
+          telegram_id: number
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          task_id: string
+          telegram_id: number
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          task_id?: string
+          telegram_id?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bolt_task_completions_task_id_fkey"
+            columns: ["task_id"]
+            isOneToOne: false
+            referencedRelation: "bolt_tasks"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      bolt_tasks: {
+        Row: {
+          active: boolean
+          created_at: string
+          description: string | null
+          icon: string
+          id: string
+          kind: string
+          reward: number
+          sort_order: number
+          title: string
+          url: string | null
+        }
+        Insert: {
+          active?: boolean
+          created_at?: string
+          description?: string | null
+          icon?: string
+          id?: string
+          kind?: string
+          reward?: number
+          sort_order?: number
+          title: string
+          url?: string | null
+        }
+        Update: {
+          active?: boolean
+          created_at?: string
+          description?: string | null
+          icon?: string
+          id?: string
+          kind?: string
+          reward?: number
+          sort_order?: number
+          title?: string
+          url?: string | null
+        }
+        Relationships: []
+      }
+      bolt_upgrades: {
+        Row: {
+          created_at: string
+          id: string
+          label: string
+          multiplier: number
+          price_ton: number
+          sort_order: number
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          label: string
+          multiplier: number
+          price_ton: number
+          sort_order?: number
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          label?: string
+          multiplier?: number
+          price_ton?: number
+          sort_order?: number
+        }
+        Relationships: []
+      }
       books: {
         Row: {
           content: Json | null
@@ -1787,6 +2523,111 @@ export type Database = {
         }
         Relationships: []
       }
+      bundle_books: {
+        Row: {
+          cover_url: string | null
+          created_at: string
+          description: string | null
+          file_url: string | null
+          id: string
+          is_published: boolean
+          position: number
+          subtitle: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          cover_url?: string | null
+          created_at?: string
+          description?: string | null
+          file_url?: string | null
+          id?: string
+          is_published?: boolean
+          position: number
+          subtitle?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          cover_url?: string | null
+          created_at?: string
+          description?: string | null
+          file_url?: string | null
+          id?: string
+          is_published?: boolean
+          position?: number
+          subtitle?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      bundle_orders: {
+        Row: {
+          admin_note: string | null
+          amount: number
+          country: string
+          created_at: string
+          currency: string
+          email: string
+          full_name: string
+          id: string
+          locale: string
+          paid_at: string | null
+          payment_method: string
+          phone: string | null
+          provider: string
+          provider_ref: string | null
+          receipt_path: string | null
+          status: Database["public"]["Enums"]["bundle_order_status"]
+          transfer_reference: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          admin_note?: string | null
+          amount?: number
+          country?: string
+          created_at?: string
+          currency?: string
+          email: string
+          full_name: string
+          id?: string
+          locale?: string
+          paid_at?: string | null
+          payment_method?: string
+          phone?: string | null
+          provider?: string
+          provider_ref?: string | null
+          receipt_path?: string | null
+          status?: Database["public"]["Enums"]["bundle_order_status"]
+          transfer_reference?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          admin_note?: string | null
+          amount?: number
+          country?: string
+          created_at?: string
+          currency?: string
+          email?: string
+          full_name?: string
+          id?: string
+          locale?: string
+          paid_at?: string | null
+          payment_method?: string
+          phone?: string | null
+          provider?: string
+          provider_ref?: string | null
+          receipt_path?: string | null
+          status?: Database["public"]["Enums"]["bundle_order_status"]
+          transfer_reference?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       calendar_connections: {
         Row: {
           access_token: string | null
@@ -1823,6 +2664,42 @@ export type Database = {
           token_expires_at?: string | null
           updated_at?: string
           user_id?: string
+        }
+        Relationships: []
+      }
+      characters: {
+        Row: {
+          created_at: string
+          current_hp: number
+          id: string
+          image_url: string | null
+          is_active: boolean
+          max_hp: number
+          name: string
+          ton_pool: number
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          current_hp?: number
+          id?: string
+          image_url?: string | null
+          is_active?: boolean
+          max_hp?: number
+          name: string
+          ton_pool?: number
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          current_hp?: number
+          id?: string
+          image_url?: string | null
+          is_active?: boolean
+          max_hp?: number
+          name?: string
+          ton_pool?: number
+          updated_at?: string
         }
         Relationships: []
       }
@@ -2387,6 +3264,81 @@ export type Database = {
           },
         ]
       }
+      course_orders: {
+        Row: {
+          amount: number
+          created_at: string
+          currency: string
+          id: string
+          kashier_ref: string | null
+          order_id: string
+          raw: Json | null
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          amount: number
+          created_at?: string
+          currency?: string
+          id?: string
+          kashier_ref?: string | null
+          order_id: string
+          raw?: Json | null
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          currency?: string
+          id?: string
+          kashier_ref?: string | null
+          order_id?: string
+          raw?: Json | null
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      course_students: {
+        Row: {
+          access_code: string
+          created_at: string
+          full_name: string | null
+          has_access: boolean
+          id: string
+          phone: string | null
+          telegram_username: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          access_code?: string
+          created_at?: string
+          full_name?: string | null
+          has_access?: boolean
+          id?: string
+          phone?: string | null
+          telegram_username?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          access_code?: string
+          created_at?: string
+          full_name?: string | null
+          has_access?: boolean
+          id?: string
+          phone?: string | null
+          telegram_username?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       credit_transactions: {
         Row: {
           action_type: string
@@ -2410,6 +3362,90 @@ export type Database = {
           created_at?: string
           description?: string | null
           id?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      crypto_payments: {
+        Row: {
+          amount: number
+          billing_interval: string
+          created_at: string
+          currency: string
+          id: string
+          plan: string
+          provider: string
+          raw: Json
+          reference: string
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          amount?: number
+          billing_interval?: string
+          created_at?: string
+          currency?: string
+          id?: string
+          plan: string
+          provider: string
+          raw?: Json
+          reference: string
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          amount?: number
+          billing_interval?: string
+          created_at?: string
+          currency?: string
+          id?: string
+          plan?: string
+          provider?: string
+          raw?: Json
+          reference?: string
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      customer_addresses: {
+        Row: {
+          address: string
+          created_at: string
+          customer_name: string
+          governorate: string
+          id: string
+          is_default: boolean
+          label: string
+          notes: string | null
+          phone: string
+          user_id: string
+        }
+        Insert: {
+          address: string
+          created_at?: string
+          customer_name: string
+          governorate: string
+          id?: string
+          is_default?: boolean
+          label?: string
+          notes?: string | null
+          phone: string
+          user_id: string
+        }
+        Update: {
+          address?: string
+          created_at?: string
+          customer_name?: string
+          governorate?: string
+          id?: string
+          is_default?: boolean
+          label?: string
+          notes?: string | null
+          phone?: string
           user_id?: string
         }
         Relationships: []
@@ -2613,6 +3649,39 @@ export type Database = {
           sort_order?: number
           structure?: Json
           style?: Json
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      dodo_catalog: {
+        Row: {
+          amount_cents: number
+          created_at: string
+          dodo_product_id: string
+          id: string
+          lang: string
+          mode: string
+          product: string
+          updated_at: string
+        }
+        Insert: {
+          amount_cents: number
+          created_at?: string
+          dodo_product_id: string
+          id?: string
+          lang: string
+          mode?: string
+          product: string
+          updated_at?: string
+        }
+        Update: {
+          amount_cents?: number
+          created_at?: string
+          dodo_product_id?: string
+          id?: string
+          lang?: string
+          mode?: string
+          product?: string
           updated_at?: string
         }
         Relationships: []
@@ -2908,6 +3977,33 @@ export type Database = {
         }
         Relationships: []
       }
+      game_notifications: {
+        Row: {
+          created_at: string
+          id: string
+          is_read: boolean
+          message: string
+          title: string
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_read?: boolean
+          message?: string
+          title: string
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_read?: boolean
+          message?: string
+          title?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       generated_sites: {
         Row: {
           created_at: string
@@ -3069,6 +4165,104 @@ export type Database = {
           user_id?: string
         }
         Relationships: []
+      }
+      gram_invest_plans: {
+        Row: {
+          apr: number
+          created_at: string
+          duration_days: number
+          early_exit_fee_pct: number
+          id: string
+          is_active: boolean
+          max_amount: number | null
+          min_amount: number
+          name: string
+          sort_order: number
+        }
+        Insert: {
+          apr: number
+          created_at?: string
+          duration_days: number
+          early_exit_fee_pct?: number
+          id?: string
+          is_active?: boolean
+          max_amount?: number | null
+          min_amount?: number
+          name: string
+          sort_order?: number
+        }
+        Update: {
+          apr?: number
+          created_at?: string
+          duration_days?: number
+          early_exit_fee_pct?: number
+          id?: string
+          is_active?: boolean
+          max_amount?: number | null
+          min_amount?: number
+          name?: string
+          sort_order?: number
+        }
+        Relationships: []
+      }
+      gram_investments: {
+        Row: {
+          amount: number
+          apr: number
+          claimed_yield: number
+          closed_at: string | null
+          created_at: string
+          duration_days: number
+          early_exit_fee_pct: number
+          ends_at: string
+          id: string
+          last_claim_at: string
+          plan_id: string
+          profile_id: string
+          started_at: string
+          status: string
+        }
+        Insert: {
+          amount: number
+          apr: number
+          claimed_yield?: number
+          closed_at?: string | null
+          created_at?: string
+          duration_days: number
+          early_exit_fee_pct?: number
+          ends_at: string
+          id?: string
+          last_claim_at?: string
+          plan_id: string
+          profile_id: string
+          started_at?: string
+          status?: string
+        }
+        Update: {
+          amount?: number
+          apr?: number
+          claimed_yield?: number
+          closed_at?: string | null
+          created_at?: string
+          duration_days?: number
+          early_exit_fee_pct?: number
+          ends_at?: string
+          id?: string
+          last_claim_at?: string
+          plan_id?: string
+          profile_id?: string
+          started_at?: string
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "gram_investments_plan_id_fkey"
+            columns: ["plan_id"]
+            isOneToOne: false
+            referencedRelation: "gram_invest_plans"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       headshot_templates: {
         Row: {
@@ -3544,6 +4738,30 @@ export type Database = {
           topic?: string | null
           user_id?: string
           weak_topics?: Json | null
+        }
+        Relationships: []
+      }
+      library_requests: {
+        Row: {
+          created_at: string
+          email: string
+          error: string | null
+          id: string
+          sent: boolean
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          error?: string | null
+          id?: string
+          sent?: boolean
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          error?: string | null
+          id?: string
+          sent?: boolean
         }
         Relationships: []
       }
@@ -4714,6 +5932,69 @@ export type Database = {
           },
         ]
       }
+      mining_reminders: {
+        Row: {
+          created_at: string
+          last_sent_at: string
+          profile_id: string
+          sent_count: number
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          last_sent_at?: string
+          profile_id: string
+          sent_count?: number
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          last_sent_at?: string
+          profile_id?: string
+          sent_count?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      mining_sessions: {
+        Row: {
+          claimed: boolean
+          created_at: string
+          ends_at: string
+          id: string
+          siri_reward: number
+          started_at: string
+          ton_reward: number
+          updated_at: string
+          usdt_reward: number
+          user_id: string
+        }
+        Insert: {
+          claimed?: boolean
+          created_at?: string
+          ends_at: string
+          id?: string
+          siri_reward?: number
+          started_at?: string
+          ton_reward?: number
+          updated_at?: string
+          usdt_reward?: number
+          user_id: string
+        }
+        Update: {
+          claimed?: boolean
+          created_at?: string
+          ends_at?: string
+          id?: string
+          siri_reward?: number
+          started_at?: string
+          ton_reward?: number
+          updated_at?: string
+          usdt_reward?: number
+          user_id?: string
+        }
+        Relationships: []
+      }
       model_media: {
         Row: {
           created_at: string
@@ -5751,6 +7032,45 @@ export type Database = {
         }
         Relationships: []
       }
+      premium_subscriptions: {
+        Row: {
+          amount: number
+          created_at: string
+          expires_at: string | null
+          id: string
+          method: string
+          plan: string
+          reference: string | null
+          sender_account: string | null
+          status: string
+          user_id: string
+        }
+        Insert: {
+          amount: number
+          created_at?: string
+          expires_at?: string | null
+          id?: string
+          method: string
+          plan?: string
+          reference?: string | null
+          sender_account?: string | null
+          status?: string
+          user_id: string
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          expires_at?: string | null
+          id?: string
+          method?: string
+          plan?: string
+          reference?: string | null
+          sender_account?: string | null
+          status?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       premium_usage: {
         Row: {
           id: string
@@ -5769,6 +7089,24 @@ export type Database = {
           template_id?: string | null
           used_at?: string
           user_id?: string
+        }
+        Relationships: []
+      }
+      prize_broadcast_log: {
+        Row: {
+          delivered: boolean
+          profile_id: string
+          sent_at: string
+        }
+        Insert: {
+          delivered?: boolean
+          profile_id: string
+          sent_at?: string
+        }
+        Update: {
+          delivered?: boolean
+          profile_id?: string
+          sent_at?: string
         }
         Relationships: []
       }
@@ -5812,11 +7150,26 @@ export type Database = {
           created_at: string
           credits: number
           display_name: string | null
+          first_name: string | null
           id: string
           image_free_uses: number
+          is_banned: boolean
+          last_name: string | null
+          photo_url: string | null
           plan: string
+          referral_code: string | null
+          referred_by: string | null
+          reward_balance: number
+          reward_expires_at: string | null
+          siri_balance: number
+          telegram_id: number | null
+          ton_balance: number
           two_factor_enabled: boolean
           updated_at: string
+          usdt_balance: number
+          user_id: string | null
+          username: string | null
+          wallet_address: string | null
         }
         Insert: {
           active_workspace_id?: string | null
@@ -5827,11 +7180,26 @@ export type Database = {
           created_at?: string
           credits?: number
           display_name?: string | null
-          id: string
+          first_name?: string | null
+          id?: string
           image_free_uses?: number
+          is_banned?: boolean
+          last_name?: string | null
+          photo_url?: string | null
           plan?: string
+          referral_code?: string | null
+          referred_by?: string | null
+          reward_balance?: number
+          reward_expires_at?: string | null
+          siri_balance?: number
+          telegram_id?: number | null
+          ton_balance?: number
           two_factor_enabled?: boolean
           updated_at?: string
+          usdt_balance?: number
+          user_id?: string | null
+          username?: string | null
+          wallet_address?: string | null
         }
         Update: {
           active_workspace_id?: string | null
@@ -5842,11 +7210,26 @@ export type Database = {
           created_at?: string
           credits?: number
           display_name?: string | null
+          first_name?: string | null
           id?: string
           image_free_uses?: number
+          is_banned?: boolean
+          last_name?: string | null
+          photo_url?: string | null
           plan?: string
+          referral_code?: string | null
+          referred_by?: string | null
+          reward_balance?: number
+          reward_expires_at?: string | null
+          siri_balance?: number
+          telegram_id?: number | null
+          ton_balance?: number
           two_factor_enabled?: boolean
           updated_at?: string
+          usdt_balance?: number
+          user_id?: string | null
+          username?: string | null
+          wallet_address?: string | null
         }
         Relationships: [
           {
@@ -6127,6 +7510,51 @@ export type Database = {
         }
         Relationships: []
       }
+      purchases: {
+        Row: {
+          access_token: string
+          amount: number
+          created_at: string
+          currency: string
+          email: string
+          email_sent: boolean
+          id: string
+          lang: string
+          paid_at: string | null
+          product: string
+          provider_payment_id: string | null
+          status: string
+        }
+        Insert: {
+          access_token?: string
+          amount: number
+          created_at?: string
+          currency?: string
+          email: string
+          email_sent?: boolean
+          id?: string
+          lang?: string
+          paid_at?: string | null
+          product: string
+          provider_payment_id?: string | null
+          status?: string
+        }
+        Update: {
+          access_token?: string
+          amount?: number
+          created_at?: string
+          currency?: string
+          email?: string
+          email_sent?: boolean
+          id?: string
+          lang?: string
+          paid_at?: string | null
+          product?: string
+          provider_payment_id?: string | null
+          status?: string
+        }
+        Relationships: []
+      }
       push_subscriptions: {
         Row: {
           auth: string
@@ -6157,6 +7585,315 @@ export type Database = {
           p256dh?: string
           user_agent?: string | null
           user_id?: string
+        }
+        Relationships: []
+      }
+      pvp_character_owned: {
+        Row: {
+          character_key: string
+          created_at: string
+          equipped: boolean
+          id: string
+          profile_id: string
+          ton_paid: number
+          tx_hash: string | null
+          updated_at: string
+        }
+        Insert: {
+          character_key: string
+          created_at?: string
+          equipped?: boolean
+          id?: string
+          profile_id: string
+          ton_paid?: number
+          tx_hash?: string | null
+          updated_at?: string
+        }
+        Update: {
+          character_key?: string
+          created_at?: string
+          equipped?: boolean
+          id?: string
+          profile_id?: string
+          ton_paid?: number
+          tx_hash?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "pvp_character_owned_character_key_fkey"
+            columns: ["character_key"]
+            isOneToOne: false
+            referencedRelation: "pvp_characters"
+            referencedColumns: ["key"]
+          },
+        ]
+      }
+      pvp_characters: {
+        Row: {
+          color: string
+          created_at: string
+          hp_mod: number
+          id: string
+          key: string
+          name: string
+          price_ton: number
+          rarity: string
+          sort_order: number
+          speed_mod: number
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          color?: string
+          created_at?: string
+          hp_mod?: number
+          id?: string
+          key: string
+          name: string
+          price_ton?: number
+          rarity?: string
+          sort_order?: number
+          speed_mod?: number
+          title?: string
+          updated_at?: string
+        }
+        Update: {
+          color?: string
+          created_at?: string
+          hp_mod?: number
+          id?: string
+          key?: string
+          name?: string
+          price_ton?: number
+          rarity?: string
+          sort_order?: number
+          speed_mod?: number
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      pvp_match_players: {
+        Row: {
+          alive: boolean
+          character_key: string
+          deaths: number
+          id: string
+          is_bot: boolean
+          joined_at: string
+          kills: number
+          match_id: string
+          photo_url: string | null
+          profile_id: string | null
+          score: number
+          slot: number
+          telegram_id: number | null
+          username: string
+          weapon_key: string
+        }
+        Insert: {
+          alive?: boolean
+          character_key?: string
+          deaths?: number
+          id?: string
+          is_bot?: boolean
+          joined_at?: string
+          kills?: number
+          match_id: string
+          photo_url?: string | null
+          profile_id?: string | null
+          score?: number
+          slot?: number
+          telegram_id?: number | null
+          username?: string
+          weapon_key?: string
+        }
+        Update: {
+          alive?: boolean
+          character_key?: string
+          deaths?: number
+          id?: string
+          is_bot?: boolean
+          joined_at?: string
+          kills?: number
+          match_id?: string
+          photo_url?: string | null
+          profile_id?: string | null
+          score?: number
+          slot?: number
+          telegram_id?: number | null
+          username?: string
+          weapon_key?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "pvp_match_players_match_id_fkey"
+            columns: ["match_id"]
+            isOneToOne: false
+            referencedRelation: "pvp_matches"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      pvp_matches: {
+        Row: {
+          arena_seed: number
+          created_at: string
+          ends_at: string | null
+          id: string
+          max_players: number
+          mode: string
+          prize_ton: number
+          started_at: string | null
+          status: string
+          updated_at: string
+          winner_profile_id: string | null
+        }
+        Insert: {
+          arena_seed?: number
+          created_at?: string
+          ends_at?: string | null
+          id?: string
+          max_players?: number
+          mode?: string
+          prize_ton?: number
+          started_at?: string | null
+          status?: string
+          updated_at?: string
+          winner_profile_id?: string | null
+        }
+        Update: {
+          arena_seed?: number
+          created_at?: string
+          ends_at?: string | null
+          id?: string
+          max_players?: number
+          mode?: string
+          prize_ton?: number
+          started_at?: string | null
+          status?: string
+          updated_at?: string
+          winner_profile_id?: string | null
+        }
+        Relationships: []
+      }
+      pvp_stats: {
+        Row: {
+          deaths: number
+          kills: number
+          matches: number
+          profile_id: string
+          rating: number
+          ton_earned: number
+          updated_at: string
+          wins: number
+        }
+        Insert: {
+          deaths?: number
+          kills?: number
+          matches?: number
+          profile_id: string
+          rating?: number
+          ton_earned?: number
+          updated_at?: string
+          wins?: number
+        }
+        Update: {
+          deaths?: number
+          kills?: number
+          matches?: number
+          profile_id?: string
+          rating?: number
+          ton_earned?: number
+          updated_at?: string
+          wins?: number
+        }
+        Relationships: []
+      }
+      pvp_weapon_owned: {
+        Row: {
+          created_at: string
+          id: string
+          profile_id: string
+          ton_paid: number
+          tx_hash: string | null
+          weapon_key: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          profile_id: string
+          ton_paid?: number
+          tx_hash?: string | null
+          weapon_key: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          profile_id?: string
+          ton_paid?: number
+          tx_hash?: string | null
+          weapon_key?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "pvp_weapon_owned_weapon_key_fkey"
+            columns: ["weapon_key"]
+            isOneToOne: false
+            referencedRelation: "pvp_weapons"
+            referencedColumns: ["key"]
+          },
+        ]
+      }
+      pvp_weapons: {
+        Row: {
+          bullet_speed: number
+          color: string
+          created_at: string
+          damage: number
+          fire_rate_ms: number
+          is_default: boolean
+          key: string
+          name: string
+          pellets: number
+          price_ton: number
+          range_px: number
+          rarity: string
+          sort_order: number
+          spread: number
+        }
+        Insert: {
+          bullet_speed?: number
+          color?: string
+          created_at?: string
+          damage?: number
+          fire_rate_ms?: number
+          is_default?: boolean
+          key: string
+          name: string
+          pellets?: number
+          price_ton?: number
+          range_px?: number
+          rarity?: string
+          sort_order?: number
+          spread?: number
+        }
+        Update: {
+          bullet_speed?: number
+          color?: string
+          created_at?: string
+          damage?: number
+          fire_rate_ms?: number
+          is_default?: boolean
+          key?: string
+          name?: string
+          pellets?: number
+          price_ton?: number
+          range_px?: number
+          rarity?: string
+          sort_order?: number
+          spread?: number
         }
         Relationships: []
       }
@@ -6316,6 +8053,33 @@ export type Database = {
           referrer_id?: string
           source_action?: string
           subscription_id?: string | null
+        }
+        Relationships: []
+      }
+      referral_rewards: {
+        Row: {
+          created_at: string
+          id: string
+          referred_user_id: string
+          referrer_id: string
+          source_type: string
+          ton_amount: number
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          referred_user_id: string
+          referrer_id: string
+          source_type?: string
+          ton_amount?: number
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          referred_user_id?: string
+          referrer_id?: string
+          source_type?: string
+          ton_amount?: number
         }
         Relationships: []
       }
@@ -7045,6 +8809,51 @@ export type Database = {
         }
         Relationships: []
       }
+      servers: {
+        Row: {
+          attack_boost: number
+          created_at: string
+          id: string
+          image_url: string | null
+          is_active: boolean
+          mining_boost: number
+          name: string
+          price_ton: number
+          rarity: string
+          ton_mining_rate: number
+          updated_at: string
+          usdt_mining_rate: number
+        }
+        Insert: {
+          attack_boost?: number
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          is_active?: boolean
+          mining_boost?: number
+          name: string
+          price_ton?: number
+          rarity?: string
+          ton_mining_rate?: number
+          updated_at?: string
+          usdt_mining_rate?: number
+        }
+        Update: {
+          attack_boost?: number
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          is_active?: boolean
+          mining_boost?: number
+          name?: string
+          price_ton?: number
+          rarity?: string
+          ton_mining_rate?: number
+          updated_at?: string
+          usdt_mining_rate?: number
+        }
+        Relationships: []
+      }
       service_incidents: {
         Row: {
           created_at: string
@@ -7078,6 +8887,24 @@ export type Database = {
         }
         Relationships: []
       }
+      service_secrets: {
+        Row: {
+          created_at: string
+          name: string
+          value: string
+        }
+        Insert: {
+          created_at?: string
+          name: string
+          value: string
+        }
+        Update: {
+          created_at?: string
+          name?: string
+          value?: string
+        }
+        Relationships: []
+      }
       service_status: {
         Row: {
           checked_at: string
@@ -7105,6 +8932,171 @@ export type Database = {
           service_name?: string
           service_url?: string
           status?: string
+        }
+        Relationships: []
+      }
+      shop_order_items: {
+        Row: {
+          created_at: string
+          id: string
+          image_url: string | null
+          order_id: string
+          product_id: string | null
+          product_name: string
+          quantity: number
+          unit_price: number
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          order_id: string
+          product_id?: string | null
+          product_name: string
+          quantity?: number
+          unit_price?: number
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          order_id?: string
+          product_id?: string | null
+          product_name?: string
+          quantity?: number
+          unit_price?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "shop_order_items_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "shop_orders"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "shop_order_items_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "shop_products"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      shop_orders: {
+        Row: {
+          address: string
+          affiliate_code: string | null
+          created_at: string
+          customer_name: string
+          governorate: string
+          id: string
+          notes: string | null
+          order_number: number
+          phone: string
+          shipping_fee: number
+          status: string
+          store_id: string | null
+          subtotal: number
+          total: number
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          address: string
+          affiliate_code?: string | null
+          created_at?: string
+          customer_name: string
+          governorate: string
+          id?: string
+          notes?: string | null
+          order_number?: number
+          phone: string
+          shipping_fee?: number
+          status?: string
+          store_id?: string | null
+          subtotal?: number
+          total?: number
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          address?: string
+          affiliate_code?: string | null
+          created_at?: string
+          customer_name?: string
+          governorate?: string
+          id?: string
+          notes?: string | null
+          order_number?: number
+          phone?: string
+          shipping_fee?: number
+          status?: string
+          store_id?: string | null
+          subtotal?: number
+          total?: number
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      shop_products: {
+        Row: {
+          category: string
+          compare_at_price: number | null
+          cost_price: number | null
+          created_at: string
+          description: string | null
+          id: string
+          image_url: string | null
+          images: Json
+          is_active: boolean
+          is_featured: boolean
+          name: string
+          price: number
+          stock: number
+          taager_sku: string | null
+          taager_url: string | null
+          updated_at: string
+          videos: Json
+        }
+        Insert: {
+          category?: string
+          compare_at_price?: number | null
+          cost_price?: number | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          image_url?: string | null
+          images?: Json
+          is_active?: boolean
+          is_featured?: boolean
+          name: string
+          price?: number
+          stock?: number
+          taager_sku?: string | null
+          taager_url?: string | null
+          updated_at?: string
+          videos?: Json
+        }
+        Update: {
+          category?: string
+          compare_at_price?: number | null
+          cost_price?: number | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          image_url?: string | null
+          images?: Json
+          is_active?: boolean
+          is_featured?: boolean
+          name?: string
+          price?: number
+          stock?: number
+          taager_sku?: string | null
+          taager_url?: string | null
+          updated_at?: string
+          videos?: Json
         }
         Relationships: []
       }
@@ -7424,6 +9416,165 @@ export type Database = {
           title?: string
           updated_at?: string
           user_id?: string
+        }
+        Relationships: []
+      }
+      stakes: {
+        Row: {
+          amount: number
+          apr: number
+          claimed_yield: number
+          closed_at: string | null
+          created_at: string
+          currency: string
+          duration_days: number
+          early_exit_fee_pct: number
+          ends_at: string
+          id: string
+          last_claim_at: string
+          plan_id: string
+          profile_id: string
+          started_at: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          amount: number
+          apr: number
+          claimed_yield?: number
+          closed_at?: string | null
+          created_at?: string
+          currency: string
+          duration_days: number
+          early_exit_fee_pct?: number
+          ends_at: string
+          id?: string
+          last_claim_at?: string
+          plan_id: string
+          profile_id: string
+          started_at?: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          amount?: number
+          apr?: number
+          claimed_yield?: number
+          closed_at?: string | null
+          created_at?: string
+          currency?: string
+          duration_days?: number
+          early_exit_fee_pct?: number
+          ends_at?: string
+          id?: string
+          last_claim_at?: string
+          plan_id?: string
+          profile_id?: string
+          started_at?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "stakes_plan_id_fkey"
+            columns: ["plan_id"]
+            isOneToOne: false
+            referencedRelation: "staking_plans"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "stakes_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      staking_plans: {
+        Row: {
+          apr: number
+          created_at: string
+          currency: string
+          duration_days: number
+          early_exit_fee_pct: number
+          id: string
+          is_active: boolean
+          max_amount: number | null
+          min_amount: number
+          name: string
+          sort_order: number
+          updated_at: string
+        }
+        Insert: {
+          apr: number
+          created_at?: string
+          currency: string
+          duration_days: number
+          early_exit_fee_pct?: number
+          id?: string
+          is_active?: boolean
+          max_amount?: number | null
+          min_amount?: number
+          name: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Update: {
+          apr?: number
+          created_at?: string
+          currency?: string
+          duration_days?: number
+          early_exit_fee_pct?: number
+          id?: string
+          is_active?: boolean
+          max_amount?: number | null
+          min_amount?: number
+          name?: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      star_payments: {
+        Row: {
+          charge_id: string | null
+          created_at: string
+          id: string
+          meta: Json
+          paid_at: string | null
+          payload: string
+          product: string
+          profile_id: string | null
+          stars: number
+          status: string
+          telegram_id: number | null
+        }
+        Insert: {
+          charge_id?: string | null
+          created_at?: string
+          id?: string
+          meta?: Json
+          paid_at?: string | null
+          payload: string
+          product: string
+          profile_id?: string | null
+          stars: number
+          status?: string
+          telegram_id?: number | null
+        }
+        Update: {
+          charge_id?: string | null
+          created_at?: string
+          id?: string
+          meta?: Json
+          paid_at?: string | null
+          payload?: string
+          product?: string
+          profile_id?: string | null
+          stars?: number
+          status?: string
+          telegram_id?: number | null
         }
         Relationships: []
       }
@@ -7772,6 +9923,78 @@ export type Database = {
         }
         Relationships: []
       }
+      tasks: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          is_active: boolean
+          is_pinned: boolean
+          link: string | null
+          reward_amount: number
+          reward_type: string
+          task_type: string
+          title: string
+          updated_at: string
+          verification_type: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_active?: boolean
+          is_pinned?: boolean
+          link?: string | null
+          reward_amount?: number
+          reward_type?: string
+          task_type?: string
+          title: string
+          updated_at?: string
+          verification_type?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_active?: boolean
+          is_pinned?: boolean
+          link?: string | null
+          reward_amount?: number
+          reward_type?: string
+          task_type?: string
+          title?: string
+          updated_at?: string
+          verification_type?: string
+        }
+        Relationships: []
+      }
+      telegram_admins: {
+        Row: {
+          created_at: string
+          id: string
+          label: string | null
+          telegram_id: number
+          updated_at: string
+          welcome_image_url: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          label?: string | null
+          telegram_id: number
+          updated_at?: string
+          welcome_image_url?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          label?: string | null
+          telegram_id?: number
+          updated_at?: string
+          welcome_image_url?: string | null
+        }
+        Relationships: []
+      }
       telegram_media: {
         Row: {
           cached_until: string | null
@@ -7835,6 +10058,72 @@ export type Database = {
           updated_at?: string
           user_id?: string
           width?: number | null
+        }
+        Relationships: []
+      }
+      telegram_payments: {
+        Row: {
+          amount_nano: number | null
+          amount_stars: number | null
+          amount_usd: number
+          billing_interval: string | null
+          created_at: string
+          credits: number
+          external_id: string | null
+          id: string
+          kind: string
+          method: string
+          nonce: string
+          paid_at: string | null
+          plan: string | null
+          raw: Json
+          sku: string
+          status: string
+          ton_address: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          amount_nano?: number | null
+          amount_stars?: number | null
+          amount_usd?: number
+          billing_interval?: string | null
+          created_at?: string
+          credits?: number
+          external_id?: string | null
+          id?: string
+          kind: string
+          method: string
+          nonce: string
+          paid_at?: string | null
+          plan?: string | null
+          raw?: Json
+          sku: string
+          status?: string
+          ton_address?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          amount_nano?: number | null
+          amount_stars?: number | null
+          amount_usd?: number
+          billing_interval?: string | null
+          created_at?: string
+          credits?: number
+          external_id?: string | null
+          id?: string
+          kind?: string
+          method?: string
+          nonce?: string
+          paid_at?: string | null
+          plan?: string | null
+          raw?: Json
+          sku?: string
+          status?: string
+          ton_address?: string | null
+          updated_at?: string
+          user_id?: string
         }
         Relationships: []
       }
@@ -7908,6 +10197,27 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      telegram_task_drafts: {
+        Row: {
+          created_at: string
+          draft: Json
+          telegram_id: number
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          draft?: Json
+          telegram_id: number
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          draft?: Json
+          telegram_id?: number
+          updated_at?: string
+        }
+        Relationships: []
       }
       telegram_tasks: {
         Row: {
@@ -8035,6 +10345,69 @@ export type Database = {
         }
         Relationships: []
       }
+      ton_payment_intents: {
+        Row: {
+          action: string
+          amount_nano: number
+          base_amount_nano: number | null
+          boc: string | null
+          confirmed_at: string | null
+          created_at: string
+          discount_pct: number
+          discount_reason: string | null
+          expires_at: string
+          failure_reason: string | null
+          id: string
+          memo: string
+          metadata: Json
+          status: string
+          telegram_id: number
+          tx_hash: string | null
+          updated_at: string
+          wallet_address: string | null
+        }
+        Insert: {
+          action: string
+          amount_nano: number
+          base_amount_nano?: number | null
+          boc?: string | null
+          confirmed_at?: string | null
+          created_at?: string
+          discount_pct?: number
+          discount_reason?: string | null
+          expires_at?: string
+          failure_reason?: string | null
+          id?: string
+          memo: string
+          metadata?: Json
+          status?: string
+          telegram_id: number
+          tx_hash?: string | null
+          updated_at?: string
+          wallet_address?: string | null
+        }
+        Update: {
+          action?: string
+          amount_nano?: number
+          base_amount_nano?: number | null
+          boc?: string | null
+          confirmed_at?: string | null
+          created_at?: string
+          discount_pct?: number
+          discount_reason?: string | null
+          expires_at?: string
+          failure_reason?: string | null
+          id?: string
+          memo?: string
+          metadata?: Json
+          status?: string
+          telegram_id?: number
+          tx_hash?: string | null
+          updated_at?: string
+          wallet_address?: string | null
+        }
+        Relationships: []
+      }
       tool_landing_images: {
         Row: {
           description: string | null
@@ -8089,6 +10462,48 @@ export type Database = {
           preview_url?: string | null
           prompt?: string | null
           tool_id?: string
+        }
+        Relationships: []
+      }
+      transactions: {
+        Row: {
+          amount: number
+          created_at: string
+          currency: string
+          id: string
+          metadata: Json
+          status: string
+          tx_hash: string | null
+          type: string
+          updated_at: string
+          user_id: string
+          wallet_address: string | null
+        }
+        Insert: {
+          amount?: number
+          created_at?: string
+          currency?: string
+          id?: string
+          metadata?: Json
+          status?: string
+          tx_hash?: string | null
+          type: string
+          updated_at?: string
+          user_id: string
+          wallet_address?: string | null
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          currency?: string
+          id?: string
+          metadata?: Json
+          status?: string
+          tx_hash?: string | null
+          type?: string
+          updated_at?: string
+          user_id?: string
+          wallet_address?: string | null
         }
         Relationships: []
       }
@@ -8537,6 +10952,48 @@ export type Database = {
         }
         Relationships: []
       }
+      user_nfts: {
+        Row: {
+          created_at: string
+          id: string
+          image_url: string
+          name: string
+          price_ton: number
+          profile_id: string | null
+          rarity: string
+          storage_path: string | null
+          telegram_id: number
+          tx_hash: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          image_url: string
+          name?: string
+          price_ton?: number
+          profile_id?: string | null
+          rarity?: string
+          storage_path?: string | null
+          telegram_id: number
+          tx_hash?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          image_url?: string
+          name?: string
+          price_ton?: number
+          profile_id?: string | null
+          rarity?: string
+          storage_path?: string | null
+          telegram_id?: number
+          tx_hash?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       user_payment_methods: {
         Row: {
           admin_note: string | null
@@ -8728,6 +11185,38 @@ export type Database = {
         }
         Relationships: []
       }
+      user_servers: {
+        Row: {
+          id: string
+          purchased_at: string
+          server_id: string
+          ton_paid: number
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          purchased_at?: string
+          server_id: string
+          ton_paid?: number
+          user_id: string
+        }
+        Update: {
+          id?: string
+          purchased_at?: string
+          server_id?: string
+          ton_paid?: number
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_servers_server_id_fkey"
+            columns: ["server_id"]
+            isOneToOne: false
+            referencedRelation: "servers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       user_supabase_connections: {
         Row: {
           access_token: string
@@ -8763,6 +11252,41 @@ export type Database = {
           user_id?: string
         }
         Relationships: []
+      }
+      user_tasks: {
+        Row: {
+          completed_at: string
+          id: string
+          reward_amount: number
+          reward_type: string
+          task_id: string
+          user_id: string
+        }
+        Insert: {
+          completed_at?: string
+          id?: string
+          reward_amount?: number
+          reward_type?: string
+          task_id: string
+          user_id: string
+        }
+        Update: {
+          completed_at?: string
+          id?: string
+          reward_amount?: number
+          reward_type?: string
+          task_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_tasks_task_id_fkey"
+            columns: ["task_id"]
+            isOneToOne: false
+            referencedRelation: "tasks"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       v0_api_keys: {
         Row: {
@@ -9982,6 +12506,14 @@ export type Database = {
         Args: { p_amount: number; p_description?: string; p_user_id: string }
         Returns: Json
       }
+      admin_activate_character_for_telegram: {
+        Args: { _character_id: string; _telegram_id: number }
+        Returns: Json
+      }
+      admin_activate_reward_for_telegram: {
+        Args: { _reward_amount: number; _telegram_id: number }
+        Returns: Json
+      }
       admin_add_api_key: {
         Args: {
           p_credit_limit?: number
@@ -9991,8 +12523,117 @@ export type Database = {
         }
         Returns: string
       }
+      admin_broadcast_notification_for_telegram: {
+        Args: { _message: string; _telegram_id: number; _title: string }
+        Returns: Json
+      }
+      admin_create_character_for_telegram: {
+        Args: {
+          _image_url: string
+          _max_hp: number
+          _name: string
+          _telegram_id: number
+        }
+        Returns: Json
+      }
+      admin_create_server_for_telegram: {
+        Args: {
+          _attack_boost: number
+          _image_url: string
+          _mining_boost: number
+          _name: string
+          _price_ton: number
+          _rarity: string
+          _telegram_id: number
+          _ton_mining_rate: number
+          _usdt_mining_rate: number
+        }
+        Returns: Json
+      }
+      admin_delete_task_for_telegram: {
+        Args: { _task_id: string; _telegram_id: number }
+        Returns: Json
+      }
+      admin_get_dashboard_for_telegram: {
+        Args: { _telegram_id: number }
+        Returns: Json
+      }
       admin_grant_pro_monthly: { Args: { target_email: string }; Returns: Json }
+      admin_pin_task_for_telegram: {
+        Args: { _is_pinned: boolean; _task_id: string; _telegram_id: number }
+        Returns: Json
+      }
+      admin_set_welcome_image_for_telegram: {
+        Args: { _telegram_id: number; _url: string }
+        Returns: Json
+      }
+      admin_toggle_ban_for_telegram: {
+        Args: { _is_banned: boolean; _profile_id: string; _telegram_id: number }
+        Returns: Json
+      }
+      admin_toggle_task_for_telegram: {
+        Args: { _is_active: boolean; _task_id: string; _telegram_id: number }
+        Returns: Json
+      }
+      admin_upsert_task_for_telegram: {
+        Args: {
+          _link: string
+          _reward_amount: number
+          _reward_type: string
+          _task_id: string
+          _task_type: string
+          _telegram_id: number
+          _title: string
+        }
+        Returns: Json
+      }
+      ai_activate_plan: {
+        Args: { _plan: string; _price: number; _profile_id: string }
+        Returns: {
+          created_at: string
+          expires_at: string | null
+          id: string
+          images_used: number
+          period_start: string
+          plan: string
+          profile_id: string
+          status: string
+          updated_at: string
+          videos_used: number
+        }
+        SetofOptions: {
+          from: "*"
+          to: "ai_subscriptions"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
+      ai_get_subscription: {
+        Args: { _profile_id: string }
+        Returns: {
+          created_at: string
+          expires_at: string | null
+          id: string
+          images_used: number
+          period_start: string
+          plan: string
+          profile_id: string
+          status: string
+          updated_at: string
+          videos_used: number
+        }
+        SetofOptions: {
+          from: "*"
+          to: "ai_subscriptions"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
       assert_model_access: { Args: { _model_id: string }; Returns: Json }
+      attach_referral_for_telegram: {
+        Args: { _code: string; _telegram_id: number }
+        Returns: Json
+      }
       block_v0_key: {
         Args: { p_id: string; p_reason: string }
         Returns: undefined
@@ -10131,6 +12772,10 @@ export type Database = {
       cleanup_high_volume_tables: { Args: never; Returns: Json }
       cleanup_old_research_reports: { Args: never; Returns: undefined }
       cleanup_rate_limits: { Args: never; Returns: undefined }
+      complete_task_for_telegram: {
+        Args: { _task_id: string; _telegram_id: number }
+        Returns: Json
+      }
       consume_daily_free_or_credits: {
         Args: {
           p_cost?: number
@@ -10194,6 +12839,52 @@ export type Database = {
         }
         Returns: Json
       }
+      expire_prize_rewards: { Args: never; Returns: number }
+      game_create_own_profile: {
+        Args: {
+          _first_name: string
+          _last_name: string
+          _photo_url: string
+          _telegram_id: number
+          _username: string
+        }
+        Returns: Json
+      }
+      game_create_transaction: {
+        Args: {
+          _amount: number
+          _currency: string
+          _status?: string
+          _telegram_id: number
+          _tx_hash?: string
+          _type: string
+          _wallet_address: string
+        }
+        Returns: Json
+      }
+      game_credit_referral: {
+        Args: { _source: string; _ton_paid: number; _user_id: string }
+        Returns: number
+      }
+      game_get_own_profile: { Args: { _telegram_id: number }; Returns: Json }
+      game_is_wallet_verified: {
+        Args: { _telegram_id: number }
+        Returns: boolean
+      }
+      game_profile_id: { Args: { _telegram_id: number }; Returns: string }
+      game_public_profiles: {
+        Args: { _ids: string[] }
+        Returns: {
+          first_name: string
+          id: string
+          photo_url: string
+          username: string
+        }[]
+      }
+      get_battle_inventory_for_telegram: {
+        Args: { _telegram_id: number }
+        Returns: Json
+      }
       get_integration_secret: {
         Args: {
           _all_tokens?: string[]
@@ -10205,6 +12896,14 @@ export type Database = {
       }
       get_invite_details: { Args: { p_token: string }; Returns: Json }
       get_landing_page_prompt: { Args: { item_id: string }; Returns: string }
+      get_payment_discount_for_telegram: {
+        Args: { _telegram_id: number }
+        Returns: Json
+      }
+      get_referral_summary_for_telegram: {
+        Args: { _telegram_id: number }
+        Returns: Json
+      }
       get_referrer_commission_rate: {
         Args: { _user_id: string }
         Returns: number
@@ -10231,6 +12930,35 @@ export type Database = {
         Returns: Json
       }
       get_workspace_invite_details: { Args: { p_token: string }; Returns: Json }
+      gram_invest_claim_for_telegram: {
+        Args: { _investment_id: string; _telegram_id: number }
+        Returns: Json
+      }
+      gram_invest_create_for_telegram: {
+        Args: { _amount: number; _plan_id: string; _telegram_id: number }
+        Returns: Json
+      }
+      gram_invest_overview_for_telegram: {
+        Args: { _telegram_id: number }
+        Returns: Json
+      }
+      gram_invest_pending_yield: {
+        Args: { _inv: Database["public"]["Tables"]["gram_investments"]["Row"] }
+        Returns: number
+      }
+      gram_invest_withdraw_for_telegram: {
+        Args: { _investment_id: string; _telegram_id: number }
+        Returns: Json
+      }
+      grant_crypto_plan: {
+        Args: {
+          p_provider: string
+          p_raw?: Json
+          p_reference: string
+          p_secret: string
+        }
+        Returns: Json
+      }
       grant_user_credits: {
         Args: {
           p_action_type: string
@@ -10240,6 +12968,7 @@ export type Database = {
         }
         Returns: number
       }
+      grant_welcome_prize: { Args: { _telegram_id: number }; Returns: Json }
       has_elite_plan: { Args: { p_user_id: string }; Returns: boolean }
       has_paid_plan: { Args: { p_user_id: string }; Returns: boolean }
       has_role: {
@@ -10258,7 +12987,9 @@ export type Database = {
         Args: { p_invite_email: string }
         Returns: boolean
       }
+      is_owner_uid: { Args: { _id: string }; Returns: boolean }
       is_service_role: { Args: never; Returns: boolean }
+      is_telegram_admin: { Args: { _telegram_id: number }; Returns: boolean }
       is_workspace_admin: {
         Args: { _user: string; _ws: string }
         Returns: boolean
@@ -10380,9 +13111,40 @@ export type Database = {
         }
         Returns: string
       }
+      next_prize_broadcast_targets: {
+        Args: { _limit: number }
+        Returns: {
+          first_name: string
+          id: string
+          telegram_id: number
+        }[]
+      }
+      nft_mining_power_for_telegram: {
+        Args: { _telegram_id: number }
+        Returns: Json
+      }
+      orders_by_phone: {
+        Args: { p_phone: string }
+        Returns: {
+          created_at: string
+          customer_name: string
+          governorate: string
+          order_number: number
+          status: string
+          total: number
+        }[]
+      }
       owns_conversation: {
         Args: { p_conversation_id: string }
         Returns: boolean
+      }
+      perform_attack_for_telegram: {
+        Args: {
+          _attack_type?: string
+          _package_key?: string
+          _telegram_id: number
+        }
+        Returns: Json
       }
       pick_api_key: {
         Args: { p_service: string }
@@ -10398,6 +13160,38 @@ export type Database = {
           id: string
         }[]
       }
+      place_order:
+        | {
+            Args: {
+              p_address: string
+              p_affiliate_code: string
+              p_customer_name: string
+              p_governorate: string
+              p_items: Json
+              p_notes: string
+              p_phone: string
+              p_shipping_fee: number
+              p_subtotal: number
+              p_total: number
+            }
+            Returns: number
+          }
+        | {
+            Args: {
+              p_address: string
+              p_affiliate_code: string
+              p_customer_name: string
+              p_governorate: string
+              p_items: Json
+              p_notes: string
+              p_phone: string
+              p_shipping_fee: number
+              p_store_id?: string
+              p_subtotal: number
+              p_total: number
+            }
+            Returns: number
+          }
       process_polar_order: {
         Args: {
           p_credits: number
@@ -10408,6 +13202,86 @@ export type Database = {
         }
         Returns: Json
       }
+      purchase_battle_item_for_telegram: {
+        Args: {
+          _category: string
+          _package_key: string
+          _package_name: string
+          _quantity: number
+          _telegram_id: number
+          _ton_paid: number
+          _tx_hash?: string
+          _wallet_address?: string
+        }
+        Returns: Json
+      }
+      purchase_server_for_telegram: {
+        Args: {
+          _server_id: string
+          _telegram_id: number
+          _ton_paid: number
+          _tx_hash?: string
+          _wallet_address?: string
+        }
+        Returns: Json
+      }
+      pvp_add_bots: {
+        Args: { _count: number; _match_id: string }
+        Returns: Json
+      }
+      pvp_buy_character: {
+        Args: {
+          _character_key: string
+          _telegram_id: number
+          _ton_paid: number
+          _tx_hash: string
+        }
+        Returns: Json
+      }
+      pvp_buy_weapon: {
+        Args: {
+          _telegram_id: number
+          _ton_paid: number
+          _tx_hash: string
+          _weapon_key: string
+        }
+        Returns: Json
+      }
+      pvp_equip_character: {
+        Args: { _character_key: string; _telegram_id: number }
+        Returns: Json
+      }
+      pvp_find_or_create_match: {
+        Args: { _mode?: string; _telegram_id: number; _weapon_key?: string }
+        Returns: Json
+      }
+      pvp_finish_match: {
+        Args: { _match_id: string; _telegram_id: number }
+        Returns: Json
+      }
+      pvp_get_characters: { Args: { _telegram_id: number }; Returns: Json }
+      pvp_get_loadout: { Args: { _telegram_id: number }; Returns: Json }
+      pvp_leaderboard: { Args: { _limit?: number }; Returns: Json }
+      pvp_report_frag: {
+        Args: {
+          _alive: boolean
+          _deaths: number
+          _kills: number
+          _match_id: string
+          _score: number
+          _telegram_id: number
+        }
+        Returns: Json
+      }
+      pvp_set_match_character: {
+        Args: {
+          _character_key: string
+          _match_id: string
+          _telegram_id: number
+        }
+        Returns: Json
+      }
+      pvp_start_match: { Args: { _match_id: string }; Returns: Json }
       record_api_key_usage: {
         Args: {
           p_cost_usd?: number
@@ -10470,6 +13344,49 @@ export type Database = {
           p_user_id: string
         }
         Returns: number
+      }
+      staking_claim_for_telegram: {
+        Args: { _stake_id: string; _telegram_id: number }
+        Returns: Json
+      }
+      staking_create_for_telegram: {
+        Args: { _amount: number; _plan_id: string; _telegram_id: number }
+        Returns: Json
+      }
+      staking_get_overview_for_telegram: {
+        Args: { _telegram_id: number }
+        Returns: Json
+      }
+      staking_pending_yield: {
+        Args: { _stake: Database["public"]["Tables"]["stakes"]["Row"] }
+        Returns: number
+      }
+      staking_unstake_for_telegram: {
+        Args: { _stake_id: string; _telegram_id: number }
+        Returns: Json
+      }
+      start_mining_for_telegram: {
+        Args: { _telegram_id: number }
+        Returns: Json
+      }
+      sync_mining_for_telegram: {
+        Args: { _telegram_id: number }
+        Returns: Json
+      }
+      tg_fulfill_payment: {
+        Args: { p_external_id: string; p_payment_id: string; p_raw?: Json }
+        Returns: Json
+      }
+      track_order: {
+        Args: { p_order_number: number; p_phone: string }
+        Returns: {
+          created_at: string
+          customer_name: string
+          governorate: string
+          order_number: number
+          status: string
+          total: number
+        }[]
       }
       update_profile_safe: {
         Args: {
@@ -10570,6 +13487,7 @@ export type Database = {
     }
     Enums: {
       app_role: "admin" | "moderator" | "user"
+      bundle_order_status: "pending" | "approved" | "rejected"
       memory_scope:
         | "account"
         | "conversation"
@@ -10714,6 +13632,7 @@ export const Constants = {
   public: {
     Enums: {
       app_role: ["admin", "moderator", "user"],
+      bundle_order_status: ["pending", "approved", "rejected"],
       memory_scope: [
         "account",
         "conversation",
