@@ -22,7 +22,7 @@ export const LegacyAiRedirect = () => {
 
 
 const SkeletonBar = ({ className = "" }: { className?: string }) => (
-  <div className={`rounded-md bg-muted/60 animate-pulse ${className}`} aria-hidden="true" />
+  <div className={`rounded-md bg-foreground/15 animate-pulse ${className}`} aria-hidden="true" />
 );
 
 /**
