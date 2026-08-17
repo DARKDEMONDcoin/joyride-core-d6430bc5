@@ -17,6 +17,7 @@
 import { supabase } from "@/integrations/supabase/client";
 import { retranslateAll } from "@/lib/domTranslator";
 import type { AuthLang } from "@/lib/authI18n";
+import { cachedJson } from "@/lib/persistentCache";
 
 /**
  * Prewarm dictionaries used to live in `src/lib/i18n/prewarm.json` (1.2 MB),
