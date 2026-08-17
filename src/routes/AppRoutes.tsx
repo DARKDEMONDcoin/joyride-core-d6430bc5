@@ -193,48 +193,39 @@ export const AppRoutes = ({ currentUserId }: { currentUserId: string | null }) =
     <Route path="/recap" element={<Navigate to="/chat" replace />} />
 
 
-    {/* ── Marketing ─────────────────────────────────────────── */}
+    {/* ── Pricing (only surviving marketing page) ───────────── */}
     <Route path="/pricing" element={<PricingPage />} />
-    <Route path="/ai-chat" element={<AIChatLandingPage />} />
-    <Route path="/ai-chat/models/:slug" element={<ModelDetailPage />} />
-    <Route path="/features-guide" element={<FeaturesGuidePage />} />
-    <Route path="/megsy-model" element={<MegsyModelPage />} />
-    <Route path="/megay" element={<MegayPage />} />
-    <Route path="/docs" element={<DocsPage />} />
-    <Route path="/docs/:groupId" element={<DocsPage />} />
-    <Route path="/docs/:groupId/:sectionId" element={<DocsPage />} />
-    <Route path="/blog" element={<BlogPage />} />
-    <Route path="/blog/:slug" element={<BlogPostPage />} />
-    <Route path="/:lang/blog" element={<BlogPage />} />
-    <Route path="/:lang/blog/:slug" element={<BlogPostPage />} />
-    <Route path="/vs/:slug" element={<ComparisonPage />} />
-    <Route path="/about" element={<AboutPage />} />
-    <Route path="/contact" element={<ContactPage />} />
-    <Route path="/support" element={<SupportPage />} />
-    <Route path="/enterprise" element={<EnterprisePage />} />
-    <Route path="/egypt" element={<EgyptPage />} />
-    <Route path="/se" element={<Navigate to="/chat" replace />} />
-    <Route path="/status" element={<Navigate to="/chat" replace />} />
 
-
-    {/* ── Legal & trust ─────────────────────────────────────── */}
-    <Route path="/trust" element={<TrustCenterPage />} />
+    {/* ── Security (settings-owned) ─────────────────────────── */}
     <Route path="/security" element={<SecurityPage />} />
-    <Route path="/terms" element={<TermsPage />} />
-    <Route path="/privacy" element={<PrivacyPage />} />
-    <Route path="/cookies" element={<CookiePolicyPage />} />
-    <Route path="/refund" element={<RefundPage />} />
-    <Route path="/policies/content" element={<ContentPolicyPage />} />
-    <Route path="/acceptable-use" element={<Navigate to="/policies/content" replace />} />
-    <Route path="/legal/affiliate" element={<AffiliateTermsPage />} />
-    <Route path="/legal/dmca" element={<DMCAPage />} />
-    <Route path="/legal/ai-disclaimer" element={<AIDisclaimerPage />} />
-    <Route path="/legal/dpa" element={<DPAPage />} />
-    <Route path="/legal/moderation" element={<ModerationPage />} />
-    <Route path="/legal/age" element={<AgePolicyPage />} />
-    <Route path="/legal/subprocessors" element={<SubprocessorsPage />} />
-    <Route path="/legal/accessibility" element={<AccessibilityPage />} />
-    <Route path="/legal/compliance" element={<CompliancePage />} />
+
+    {/* ── Retired marketing / legal pages ───────────────────── */}
+    <Route path="/se" element={toChat} />
+    <Route path="/status" element={toChat} />
+    <Route path="/ai-chat" element={toChat} />
+    <Route path="/ai-chat/*" element={toChat} />
+    <Route path="/features-guide" element={toChat} />
+    <Route path="/megsy-model" element={toChat} />
+    <Route path="/megay" element={toChat} />
+    <Route path="/docs" element={toChat} />
+    <Route path="/docs/*" element={toChat} />
+    <Route path="/blog" element={toChat} />
+    <Route path="/blog/*" element={toChat} />
+    <Route path="/vs/:slug" element={toChat} />
+    <Route path="/about" element={toChat} />
+    <Route path="/contact" element={toChat} />
+    <Route path="/support" element={toChat} />
+    <Route path="/enterprise" element={toPricing} />
+    <Route path="/egypt" element={toChat} />
+    <Route path="/trust" element={toChat} />
+    <Route path="/terms" element={toChat} />
+    <Route path="/privacy" element={toChat} />
+    <Route path="/cookies" element={toChat} />
+    <Route path="/refund" element={toChat} />
+    <Route path="/policies/*" element={toChat} />
+    <Route path="/acceptable-use" element={toChat} />
+    <Route path="/legal/*" element={toChat} />
+
 
     {/* ── Legacy aliases — everything retired now redirects ──── */}
     <Route path="/landing" element={toChat} />
