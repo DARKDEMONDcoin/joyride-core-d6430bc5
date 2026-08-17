@@ -17,9 +17,33 @@
 import { supabase } from "@/integrations/supabase/client";
 import { retranslateAll } from "@/lib/domTranslator";
 import type { AuthLang } from "@/lib/authI18n";
-import prewarm from "@/lib/i18n/prewarm.json";
 
-const PREWARM = prewarm as Record<string, Record<string, string>>;
+/**
+ * Prewarm dictionaries used to live in `src/lib/i18n/prewarm.json` (1.2 MB),
+ * which meant every visitor downloaded all 25 languages inside the JS bundle.
+ * They are now static assets under `public/i18n/prewarm/<lang>.json` and are
+ * fetched lazily — only for the language actually in use (~35 KB).
+ */
+const PREWARM = new Map<string, Record<string, string>>();
+const prewarmRequested = new Set<string>();
+
+function ensurePrewarm(lang: string) {
+  if (!lang || lang === "en" || prewarmRequested.has(lang)) return;
+  prewarmRequested.add(lang);
+  void fetch(`/i18n/prewarm/${encodeURIComponent(lang)}.json`)
+    .then((r) => (r.ok ? r.json() : null))
+    .then((seed: Record<string, string> | null) => {
+      if (!seed) return;
+      PREWARM.set(lang, seed);
+      const c = caches.get(lang);
+      if (c) {
+        for (const [k, v] of Object.entries(seed)) if (!c.has(k)) c.set(k, v);
+      }
+      retranslateAll();
+    })
+    .catch(() => {});
+}
+
 
 const NAMESPACE = "auto";
 const STORAGE_KEY = (lang: string) => `megsy:i18n:auto:${lang}`;
@@ -64,10 +88,11 @@ function persistToStorage(lang: string, cache: LangCache) {
 }
 
 function getCache(lang: string): LangCache {
+  ensurePrewarm(lang);
   let c = caches.get(lang);
   if (!c) {
     c = loadFromStorage(lang);
-    const seed = PREWARM[lang];
+    const seed = PREWARM.get(lang);
     if (seed) {
       for (const [k, v] of Object.entries(seed)) {
         if (!c.has(k)) c.set(k, v);
@@ -77,6 +102,7 @@ function getCache(lang: string): LangCache {
   }
   return c;
 }
+
 
 export function lookupRemote(source: string, lang: string): string | null {
   if (!lang || lang === "en") return null;

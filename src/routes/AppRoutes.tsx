@@ -34,7 +34,6 @@ import {
   // integrations hub
   IntegrationsPage,
   IntegrationDetailPage,
-  IntegrationAppTest,
   // settings
   SettingsPage,
   CustomizationPage,
@@ -148,7 +147,6 @@ export const AppRoutes = ({ currentUserId }: { currentUserId: string | null }) =
         path="/settings/integrations/:id"
         element={<ProtectedRoute><IntegrationDetailPage /></ProtectedRoute>}
       />
-      <Route path="/integration-app-test" element={<IntegrationAppTest />} />
     </Route>
 
     {/* ── Settings ──────────────────────────────────────────── */}
