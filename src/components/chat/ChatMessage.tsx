@@ -766,7 +766,8 @@ const UserMarkdown = ({
   >
     {content}
   </ReactMarkdown>
-);
+  );
+};
 
 const ChatMessage = ({
   role,
