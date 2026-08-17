@@ -1187,13 +1187,12 @@ export const AVAILABLE_LANGS: { code: AuthLang; label: string; native: string }[
   { code: "pl", label: "Polish", native: "Polski" },
 ];
 
-// ─── Lazy-loaded exact-text dictionary ─────────────────────────────────────
-// The full EXACT_TEXT_TRANSLATIONS object is ~1 MB. It used to live inline in
-// this module, ballooning the entry chunk. It now lives in its own file and
-// is imported dynamically the first time a non-English user needs it.
-// English users never trigger the load. Until the chunk resolves, translation
-// functions return the original English text (identical to today's behaviour
-// when a key is missing) — no user-visible regression, ~1 MB off the entry.
+// ─── Lazy-fetched exact-text dictionary ────────────────────────────────────
+// The full dictionary is ~1 MB. It lives as a static asset
+// (public/i18n/exact-text.json) and is fetched the first time a non-English
+// user needs it, so it never enters the JS bundle or the build's memory.
+// English users never trigger the fetch. Until it resolves, translation
+// functions return the original English text — no user-visible regression.
 type ExactDict = Record<string, Partial<Record<AuthLang, string>> & { en: string }>;
 let EXACT_TEXT_TRANSLATIONS: ExactDict | null = null;
 let GREETING_PREFIXES: readonly string[] = [];
@@ -1202,10 +1201,12 @@ let exactDictLoading: Promise<void> | null = null;
 function ensureExactDict(lang: AuthLang): void {
   if (EXACT_TEXT_TRANSLATIONS || exactDictLoading) return;
   if (lang === "en") return; // English callers never need the dict
-  exactDictLoading = import("./authI18n.exactText")
-    .then((m) => {
-      EXACT_TEXT_TRANSLATIONS = m.EXACT_TEXT_TRANSLATIONS;
-      GREETING_PREFIXES = m.GREETING_PREFIXES;
+  if (typeof fetch !== "function") return;
+  exactDictLoading = fetch("/i18n/exact-text.json")
+    .then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
+    .then((data: { greetingPrefixes?: string[]; translations?: ExactDict }) => {
+      EXACT_TEXT_TRANSLATIONS = data.translations ?? {};
+      GREETING_PREFIXES = data.greetingPrefixes ?? [];
       // Wake any React subscribers so text re-renders in the target language.
       const current = getUserLang();
       listeners.forEach((l) => l(current));
@@ -1215,6 +1216,7 @@ function ensureExactDict(lang: AuthLang): void {
       exactDictLoading = null;
     });
 }
+
 
 
 export function translateExactText(text: string, lang?: AuthLang): string {
