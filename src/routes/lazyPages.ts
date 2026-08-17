@@ -75,37 +75,7 @@ export const SkillsSettingsPage = lazy(() => import("@/pages/settings/SkillsSett
 export const SkillsNewPage = lazy(() => import("@/pages/settings/SkillsNewPage"));
 
 /* ── Marketing / legal ────────────────────────────────────────── */
-export const LandingPage = lazy(() => import("@/pages/marketing/LandingPage"));
 export const PricingPage = lazy(() => import("@/pages/marketing/PricingPage"));
-export const AIChatLandingPage = lazy(() => import("@/pages/marketing/AIChatLandingPage"));
-export const ModelDetailPage = lazy(() => import("@/pages/marketing/ModelDetailPage"));
-export const FeaturesGuidePage = lazy(() => import("@/pages/marketing/FeaturesGuidePage"));
-export const MegsyModelPage = lazy(() => import("@/pages/marketing/MegsyModelPage"));
-export const MegayPage = lazy(() => import("@/pages/marketing/MegayPage"));
-export const DocsPage = lazy(() => import("@/pages/marketing/DocsPage"));
-export const BlogPage = lazy(() => import("@/pages/marketing/BlogPage"));
-export const BlogPostPage = lazy(() => import("@/pages/marketing/BlogPostPage"));
-export const ComparisonPage = lazy(() => import("@/pages/marketing/ComparisonPage"));
-export const AboutPage = lazy(() => import("@/pages/marketing/AboutPage"));
-export const ContactPage = lazy(() => import("@/pages/marketing/ContactPage"));
-export const SupportPage = lazy(() => import("@/pages/marketing/SupportPage"));
-export const EnterprisePage = lazy(() => import("@/pages/marketing/EnterprisePage"));
-export const EgyptPage = lazy(() => import("@/pages/marketing/EgyptPage"));
-export const TrustCenterPage = lazy(() => import("@/pages/marketing/TrustCenterPage"));
-export const CompliancePage = lazy(() => import("@/pages/marketing/CompliancePage"));
-export const ModerationPage = lazy(() => import("@/pages/marketing/ModerationPage"));
-export const AccessibilityPage = lazy(() => import("@/pages/marketing/AccessibilityPage"));
-export const AgePolicyPage = lazy(() => import("@/pages/marketing/AgePolicyPage"));
-export const AIDisclaimerPage = lazy(() => import("@/pages/marketing/AIDisclaimerPage"));
-export const AffiliateTermsPage = lazy(() => import("@/pages/marketing/AffiliateTermsPage"));
-export const ContentPolicyPage = lazy(() => import("@/pages/marketing/ContentPolicyPage"));
-export const CookiePolicyPage = lazy(() => import("@/pages/marketing/CookiePolicyPage"));
-export const PrivacyPage = lazy(() => import("@/pages/marketing/PrivacyPage"));
-export const TermsPage = lazy(() => import("@/pages/marketing/TermsPage"));
-export const RefundPage = lazy(() => import("@/pages/marketing/RefundPage"));
-export const DMCAPage = lazy(() => import("@/pages/marketing/DMCAPage"));
-export const DPAPage = lazy(() => import("@/pages/marketing/DPAPage"));
-export const SubprocessorsPage = lazy(() => import("@/pages/marketing/SubprocessorsPage"));
 
 /* ── Standalone utilities ─────────────────────────────────────── */
 export const SlidesPreviewPage = lazy(() => import("@/pages/SlidesPreviewPage"));
