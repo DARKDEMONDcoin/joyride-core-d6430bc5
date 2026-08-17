@@ -242,9 +242,14 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
+      // Side-effect-only Node stream imports coming from @tanstack/react-start
+      // must never reach the browser as bare `node:` specifiers.
+      "node:stream/web": path.resolve(__dirname, "./src/lib/node-stream-browser-stub.ts"),
+      "node:stream": path.resolve(__dirname, "./src/lib/node-stream-browser-stub.ts"),
       "#tanstack-router-entry": path.resolve(__dirname, "./src/lib/tanstack-router-entry-stub.ts"),
       "#tanstack-start-entry": path.resolve(__dirname, "./src/lib/tanstack-router-entry-stub.ts"),
       "tanstack-start-manifest:v": path.resolve(__dirname, "./src/lib/tanstack-start-manifest-stub.ts"),
+
     },
   },
   optimizeDeps: {
