@@ -93,20 +93,37 @@ function pickBrandKey(name = "", provider = ""): keyof typeof REGISTRY | null {
 // brand doesn't re-mount / re-fetch the chunk.
 const lazyCache = new Map<string, ReturnType<typeof lazy>>();
 
+const EmptyIcon: ComponentType<any> = () => null;
+
 function getLazyBrand(key: keyof typeof REGISTRY, mono: boolean) {
   const cacheKey = `${key}:${mono ? "m" : "c"}`;
   const cached = lazyCache.get(cacheKey);
   if (cached) return cached;
   const Comp = lazy(async () => {
-    const mod = await REGISTRY[key]();
-    const Root = mod.default;
-    // Prefer the brand's Color mark when available.
-    const Chosen = !mono && Root?.Color ? Root.Color : Root;
-    return { default: Chosen as ComponentType<any> };
+    // Icon chunks are cosmetic: a failed fetch (stale dev chunk, offline,
+    // CDN hiccup) must NEVER bubble to the route error boundary and blank the
+    // page. Retry once, then fall back to rendering nothing.
+    try {
+      const mod = await REGISTRY[key]();
+      const Root = mod.default;
+      const Chosen = !mono && Root?.Color ? Root.Color : Root;
+      return { default: Chosen as ComponentType<any> };
+    } catch {
+      try {
+        const mod = await REGISTRY[key]();
+        const Root = mod.default;
+        const Chosen = !mono && Root?.Color ? Root.Color : Root;
+        return { default: Chosen as ComponentType<any> };
+      } catch {
+        lazyCache.delete(cacheKey);
+        return { default: EmptyIcon };
+      }
+    }
   });
   lazyCache.set(cacheKey, Comp);
   return Comp;
 }
+
 
 interface Props {
   name?: string;
