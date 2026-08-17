@@ -276,6 +276,8 @@ export default defineConfig({
         "PixVerse","Hailuo","Hedra","Hunyuan","CogVideo","Kolors","Krea","Midjourney","Dalle",
         "TopazLabs","Claude","Anthropic","Perplexity","Zhipu","Kimi",
       ].map((n) => `@lobehub/icons/es/${n}`),
+    ],
+
 
     exclude: ["msw", "@mswjs/interceptors", "@tanstack/react-start", "@tanstack/start-server-core"],
   },
