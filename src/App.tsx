@@ -176,7 +176,7 @@ const App = () => {
                       <RouteErrorBoundary>
                         <SettingsShell>
                           <DeferredRoutes>
-                            <AppRoutes currentUserId={currentUserId} />
+                            {AppRoutes({ currentUserId })}
                           </DeferredRoutes>
                         </SettingsShell>
                       </RouteErrorBoundary>
