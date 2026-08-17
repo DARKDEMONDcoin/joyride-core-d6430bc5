@@ -30,9 +30,12 @@ const prewarmRequested = new Set<string>();
 function ensurePrewarm(lang: string) {
   if (!lang || lang === "en" || prewarmRequested.has(lang)) return;
   prewarmRequested.add(lang);
-  void fetch(`/i18n/prewarm/${encodeURIComponent(lang)}.json`)
-    .then((r) => (r.ok ? r.json() : null))
-    .then((seed: Record<string, string> | null) => {
+  // Fetched on first use only; afterwards it is served from the local runtime
+  // cache (localStorage / Cache Storage) with no network request at all.
+  void cachedJson<Record<string, string>>(`/i18n/prewarm/${encodeURIComponent(lang)}.json`, {
+    key: `i18n:prewarm:${lang}`,
+  })
+    .then((seed) => {
       if (!seed) return;
       PREWARM.set(lang, seed);
       const c = caches.get(lang);
