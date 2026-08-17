@@ -244,8 +244,9 @@ export const AppRoutes = ({ currentUserId }: { currentUserId: string | null }) =
     <Route path="/support" element={<SupportPage />} />
     <Route path="/enterprise" element={<EnterprisePage />} />
     <Route path="/egypt" element={<EgyptPage />} />
-    <Route path="/se" element={<SePage />} />
-    <Route path="/status" element={<PublicStatusPage />} />
+    <Route path="/se" element={<Navigate to="/chat" replace />} />
+    <Route path="/status" element={<Navigate to="/chat" replace />} />
+
 
     {/* ── Legal & trust ─────────────────────────────────────── */}
     <Route path="/trust" element={<TrustCenterPage />} />
