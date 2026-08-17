@@ -358,7 +358,9 @@ export const RootRoute = ({ authedElement }: { authedElement: React.ReactNode })
   }, []);
 
   void authedElement;
-  if (!state.resolved) return null;
+  void state;
+  // Every visitor (guest or signed-in) lands in the app, so redirect
+  // immediately instead of holding a blank frame until the session resolves.
   return <Navigate to="/chat" replace />;
 };
 
