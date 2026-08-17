@@ -325,10 +325,8 @@ export default defineConfig({
         // into the entry graph. This is the fix for the "landing page loads
         // 3.9 MB of JS" regression.
         manualChunks(id) {
-          // Lazy-loaded 1 MB exact-text i18n dictionary — keep it in its own
-          // chunk so it never gets hoisted into the entry graph.
-          if (id.includes("authI18n.exactText")) return "i18n-exact";
           if (!id.includes("node_modules")) return;
+
           // Truly universal — only the React runtime + router live in the
           // entry chunk. Everything else must travel with the route/component
           // that first imports it, Facebook-style.
