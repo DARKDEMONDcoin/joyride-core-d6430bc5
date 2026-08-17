@@ -16,7 +16,6 @@ import { registerRoute } from "@/lib/routePrefetch";
 // -- Top-level app routes --------------------------------------------------
 registerRoute(/^\/auth(\/|$)/, () => import("@/pages/auth/AuthPage"));
 registerRoute(/^\/chat(\/|$)/, () => import("@/pages/chat/ChatPage"));
-registerRoute(/^\/library(\/|$)/, () => import("@/pages/library/LibraryPage"));
 
 // -- Settings --------------------------------------------------------------
 registerRoute(/^\/settings(\/|$)/, () => import("@/pages/settings/SettingsPage"));
@@ -47,9 +46,5 @@ registerRoute(/^\/integrations$/, () => import("@/pages/integrations/Integration
 registerRoute(/^\/integrations\/[^/]+$/, () => import("@/pages/integrations/IntegrationDetailPage"));
 
 // -- Landings / promos -----------------------------------------------------
-registerRoute(/^\/landings(\/|$)/, () => import("@/pages/landings/ServiceLandingPage"));
-registerRoute(/^\/gallery(\/|$)/, () => import("@/pages/landing-gallery/LandingGalleryPage"));
-registerRoute(/^\/promo\/unlock/, () => import("@/pages/PromoUnlockPage"));
-registerRoute(/^\/promo\/masr/, () => import("@/pages/PromoMasrPage"));
 
 export {};

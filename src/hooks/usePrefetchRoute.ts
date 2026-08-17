@@ -25,9 +25,6 @@ const importForPath = (key: string): Promise<unknown> | null => {
   if (key.startsWith("/settings/billing")) {
     return import("@/pages/billing/BillingPage");
   }
-  if (key.startsWith("/settings/workspaces") || key.startsWith("/workspace")) {
-    return import("@/pages/workspace/WorkspacesPage");
-  }
   if (key.startsWith("/settings/profile/edit")) {
     return import("@/pages/settings/ProfileEditPage");
   }
@@ -48,9 +45,6 @@ const importForPath = (key: string): Promise<unknown> | null => {
     key === "/register"
   ) {
     return import("@/pages/auth/AuthPage");
-  }
-  if (key.startsWith("/showcase") || key.startsWith("/gallery")) {
-    return import("@/pages/landing-gallery/LandingGalleryPage");
   }
   if (key.startsWith("/docs")) {
     return import("@/pages/marketing/DocsPage");
