@@ -15,6 +15,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { sanitizeErrorMessage } from "@/lib/sanitizeError";
+import { cachedJson } from "@/lib/persistentCache";
 
 export type AuthLang =
   | "en"
