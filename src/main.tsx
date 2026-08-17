@@ -7,6 +7,10 @@ import { LazyMotion } from "framer-motion";
 // and chat (see ChatPage, MobilePushShell, MobileBottomSheet, AppSidebar).
 // Downgrading to `domAnimation` disables those features silently.
 const loadMotionFeatures = () => import("framer-motion").then((m) => m.domMax);
+// Start fetching the chat chunk in parallel with app boot. `/`, `/index` and
+// `/chat` all render ChatPage, so by the time the router mounts the chunk is
+// usually already in memory — no route-level loading state is ever painted.
+void import("@/pages/chat/ChatPage");
 import App from "./App.tsx";
 import "./index.css";
 import "./styles/claude-chat.css";

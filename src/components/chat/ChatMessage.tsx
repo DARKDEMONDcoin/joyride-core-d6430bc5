@@ -27,8 +27,7 @@ import remarkBreaks from "remark-breaks";
 import remarkMath from "remark-math";
 import rehypeRaw from "rehype-raw";
 import rehypeSanitize from "rehype-sanitize";
-import rehypeKatex from "rehype-katex";
-import "katex/dist/katex.min.css";
+import { useKatexPlugin, hasMath } from "@/lib/lazyKatex";
 import { chatMarkdownSchema } from "@/lib/security/markdownSanitize";
 import { visit, SKIP } from "unist-util-visit";
 import { toString } from "mdast-util-to-string";
@@ -402,6 +401,7 @@ const MarkdownRenderer = ({
   // Defer markdown re-parses while tokens stream in. Keeps input & scroll
   // responsive at 60fps even on very long messages.
   const deferredContent = useDeferredValue(content);
+  const katexPlugin = useKatexPlugin(hasMath(deferredContent));
   return (
   <ReactMarkdown
     remarkPlugins={[remarkGfm, remarkBreaks, remarkMath, remarkCleanResearchLayout]}
@@ -410,7 +410,11 @@ const MarkdownRenderer = ({
     // handlers, or javascript: URIs. rehypeSanitize with our KaTeX-aware
     // schema runs immediately after and strips them while preserving math and
     // BiDi attributes.
-    rehypePlugins={[rehypeRaw, [rehypeSanitize, chatMarkdownSchema], rehypeKatex]}
+    rehypePlugins={
+      katexPlugin
+        ? [rehypeRaw, [rehypeSanitize, chatMarkdownSchema], katexPlugin]
+        : [rehypeRaw, [rehypeSanitize, chatMarkdownSchema]]
+    }
     components={{
       p: ({ children }) => (
         <p dir="auto">
@@ -701,10 +705,12 @@ const UserMarkdown = ({
 }: {
   content: string;
   onLinkClick: (e: React.MouseEvent<HTMLAnchorElement>, href: string) => void;
-}) => (
+}) => {
+  const katexPlugin = useKatexPlugin(hasMath(content));
+  return (
   <ReactMarkdown
     remarkPlugins={[remarkGfm, remarkBreaks, remarkMath]}
-    rehypePlugins={[rehypeKatex]}
+    rehypePlugins={katexPlugin ? [katexPlugin] : []}
     components={{
       p: ({ children }) => (
         <p className="m-0 [&:not(:first-child)]:mt-2">{renderChildrenWithMentions(children)}</p>
@@ -760,7 +766,8 @@ const UserMarkdown = ({
   >
     {content}
   </ReactMarkdown>
-);
+  );
+};
 
 const ChatMessage = ({
   role,
