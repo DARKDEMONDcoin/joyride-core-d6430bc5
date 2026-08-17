@@ -266,7 +266,19 @@ export default defineConfig({
       "clsx",
       "tailwind-merge",
       "class-variance-authority",
+      // Brand icons are dynamically imported per-brand (BrandIcon.tsx). Without
+      // pre-bundling, the first render of a new brand triggers a mid-session
+      // dep re-optimize, which invalidates already-loaded chunk URLs and makes
+      // the page hang with "Failed to fetch dynamically imported module".
+      ...[
+        "Flux","Bfl","OpenAI","Gemini","NanoBanana","Ideogram","Recraft","ByteDance","Doubao",
+        "Alibaba","Kling","Minimax","Runway","Stability","Grok","XAI","Fal","Sora","Luma","Pika",
+        "PixVerse","Hailuo","Hedra","Hunyuan","CogVideo","Kolors","Krea","Midjourney","Dalle",
+        "TopazLabs","Claude","Anthropic","Perplexity","Zhipu","Kimi",
+      ].map((n) => `@lobehub/icons/es/${n}`),
     ],
+
+
     exclude: ["msw", "@mswjs/interceptors", "@tanstack/react-start", "@tanstack/start-server-core"],
   },
 
