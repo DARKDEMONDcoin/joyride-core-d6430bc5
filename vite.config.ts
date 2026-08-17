@@ -320,13 +320,7 @@ export default defineConfig({
     // Each lazy route now fetches its own chunks strictly on demand.
     modulePreload: false,
     rollupOptions: {
-      // `node:stream*` must NOT be external for the browser bundle: leaving
-      // those specifiers untouched made the published app try to fetch
-      // `node:stream` and render a blank page. They are aliased to an empty
-      // stub instead. Other `node:*` builtins stay external.
-      external: (id: string) =>
-        /^(npm:|https?:\/\/|jsr:)/.test(id) ||
-        (id.startsWith("node:") && !id.startsWith("node:stream")),
+      external: [/^npm:/, /^https?:\/\//, /^jsr:/, /^node:/],
       output: {
         // Keep only the truly universal runtime packages in a shared vendor
         // chunk. Everything else is left to Rollup's default splitter so that
