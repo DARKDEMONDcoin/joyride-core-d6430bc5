@@ -286,11 +286,7 @@ export const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   return <>{children}</>;
 };
 
-// Root route:
-// - Signed-in users → ChatPage.
-// - Guests (desktop AND mobile) → LandingPage. This prevents the "empty black
-//   chat page" first-open experience for guests on phones/PWA installs.
-//   Chat is still reachable directly via /chat once signed in.
+// Root route: every visitor (guest or signed-in) goes straight into the app.
 export const RootRoute = ({ authedElement }: { authedElement: React.ReactNode }) => {
   bootstrapAuth();
   const [state, setState] = useState(cachedAuthState);
@@ -303,34 +299,11 @@ export const RootRoute = ({ authedElement }: { authedElement: React.ReactNode })
     };
   }, []);
 
-  // No landing page: send every visitor straight into the app.
   void authedElement;
-  if (!state.resolved) {
-    const isMobile =
-      typeof window !== "undefined" &&
-      (window.matchMedia?.("(max-width: 768px)").matches ||
-        /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent));
-    const seenWelcome =
-      typeof window !== "undefined" &&
-      localStorage.getItem("megsy_seen_welcome") === "1";
-    if (isMobile && !seenWelcome) return <Navigate to="/welcome" replace />;
-    return null;
-  }
-  // On mobile, first-time guests see the Welcome showcase before /auth.
-  if (!state.authenticated) {
-    const isMobile =
-      typeof window !== "undefined" &&
-      (window.matchMedia?.("(max-width: 768px)").matches ||
-        /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent));
-    const seenWelcome =
-      typeof window !== "undefined" &&
-      localStorage.getItem("megsy_seen_welcome") === "1";
-    if (isMobile && !seenWelcome) {
-      return <Navigate to="/welcome" replace />;
-    }
-  }
+  if (!state.resolved) return null;
   return <Navigate to="/chat" replace />;
 };
+
 
 
 
