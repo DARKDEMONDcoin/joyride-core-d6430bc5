@@ -13,9 +13,6 @@ const routePreloadCache = new Map<string, Promise<unknown>>();
 const strip = (path: string) => path.split(/[?#]/)[0].replace(/\/+$/, "") || "/";
 
 const importForPath = (key: string): Promise<unknown> | null => {
-  if (key === "/" || key === "/home" || key === "/landing") {
-    return import("@/pages/marketing/LandingPage");
-  }
   if (key.startsWith("/chat") || key.startsWith("/build")) {
     return import("@/pages/chat/ChatPage");
   }
@@ -45,12 +42,6 @@ const importForPath = (key: string): Promise<unknown> | null => {
     key === "/register"
   ) {
     return import("@/pages/auth/AuthPage");
-  }
-  if (key.startsWith("/docs")) {
-    return import("@/pages/marketing/DocsPage");
-  }
-  if (key.startsWith("/contact")) {
-    return import("@/pages/marketing/ContactPage");
   }
   return null;
 };
