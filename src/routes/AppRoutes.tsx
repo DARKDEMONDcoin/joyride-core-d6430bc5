@@ -6,6 +6,9 @@ import {
   ChatPage,
   SharedChatPage,
   ResearchPreviewPage,
+  SlidesPreviewPage,
+  SlidesFilePreviewPage,
+  DocumentPreviewPage,
   // auth hub
   AuthPage,
   OAuthCallbackPage,
@@ -211,11 +214,13 @@ export const AppRoutes = ({ currentUserId }: { currentUserId: string | null }) =
     <Route path="/research/preview/:id" element={<ProtectedRoute><ResearchPreviewPage /></ProtectedRoute>} />
     <Route path="/research/share/:token" element={<ResearchPreviewPage />} />
 
-    {/* ── Retired preview routes ────────────────────────────── */}
+    {/* ── Documents & slides previews ───────────────────────── */}
+    <Route path="/slides/preview/:id" element={<SlidesPreviewPage />} />
+    <Route path="/slides/file-preview/:id" element={<SlidesFilePreviewPage />} />
+    <Route path="/document/:artifactId" element={<DocumentPreviewPage />} />
+
+    {/* ── Retired routes ────────────────────────────────────── */}
     <Route path="/recap" element={<Navigate to="/chat" replace />} />
-    <Route path="/slides/preview/:id" element={<Navigate to="/chat" replace />} />
-    <Route path="/slides/file-preview/:id" element={<Navigate to="/chat" replace />} />
-    <Route path="/document/:artifactId" element={<Navigate to="/chat" replace />} />
 
 
     {/* ── Marketing ─────────────────────────────────────────── */}

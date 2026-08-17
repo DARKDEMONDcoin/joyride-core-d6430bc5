@@ -108,3 +108,6 @@ export const DPAPage = lazy(() => import("@/pages/marketing/DPAPage"));
 export const SubprocessorsPage = lazy(() => import("@/pages/marketing/SubprocessorsPage"));
 
 /* ── Standalone utilities ─────────────────────────────────────── */
+export const SlidesPreviewPage = lazy(() => import("@/pages/SlidesPreviewPage"));
+export const SlidesFilePreviewPage = lazy(() => import("@/pages/SlidesFilePreviewPage"));
+export const DocumentPreviewPage = lazy(() => import("@/pages/DocumentPreviewPage"));
