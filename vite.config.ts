@@ -264,7 +264,6 @@ export default defineConfig({
     // source of dev-time lag. Prod already tree-shakes them via package exports.
     include: [
       "use-sync-external-store/shim/with-selector",
-      "@integration-app/react",
       "lucide-react",
       "date-fns",
       "date-fns/locale",
@@ -332,6 +331,26 @@ export default defineConfig({
         manualChunks(id) {
           if (!id.includes("node_modules")) return;
 
+          // MUST come before the react-vendor rule below: the substring
+          // "react-router" also matches `@tanstack/react-router`, which is a
+          // transitive dependency of `@tanstack/react-start` and ships SSR
+          // helpers that `import "node:stream"`. Grouping it into the entry
+          // chunk left bare `node:stream` imports in the browser bundle, so
+          // the production app died with a CORS/scheme error and rendered a
+          // blank page. Keep the whole Start/Router SSR family in one chunk
+          // that only the PDF path ever loads.
+          if (
+            id.includes("@tanstack/react-start") ||
+            id.includes("@tanstack/start-") ||
+            id.includes("@tanstack/react-router") ||
+            id.includes("@tanstack/router-core") ||
+            id.includes("@tanstack/devtools")
+          ) {
+            return "tanstack-start";
+          }
+
+
+
           // Truly universal — only the React runtime + router live in the
           // entry chunk. Everything else must travel with the route/component
           // that first imports it, Facebook-style.
@@ -351,13 +370,16 @@ export default defineConfig({
             return "react-vendor";
           }
           // Keep Integration.app out of react-vendor. Its package path is
-          // `@integration-app/react`, so a broad `/react/` substring match
           // accidentally bundled the SDK into the React runtime chunk. The SDK
           // imports SWR/client helpers that also live in other async chunks,
           // creating a production circular import and crashing before mount
           // with "Cannot access '<var>' before initialization".
-          if (id.includes("@integration-app")) return "integration-app";
+          // @assistant-ui is a core chat dependency and MUST NOT share a chunk
+          // with the 1 MB Integration.app SDK — otherwise opening /chat pulls
+          // the whole integrations SDK down before first paint.
+          if (id.includes("@assistant-ui")) return "assistant-ui";
           if (id.includes("@supabase")) return "supabase";
+
 
           // Motion must stay in one chunk. Splitting Framer Motion internals
           // across `motion-core` / `motion-features` can break its circular
