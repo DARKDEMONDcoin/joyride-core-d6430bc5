@@ -14,7 +14,6 @@ void import("@/pages/chat/ChatPage");
 import App from "./App.tsx";
 import "./index.css";
 import "./styles/claude-chat.css";
-import "./styles/settings-amber.css";
 import "./styles/pwa-safe-area.css";
 import "./styles/pwa-responsive.css";
 import "./styles/font-fallback.css";
