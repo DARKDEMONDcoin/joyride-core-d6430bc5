@@ -2261,7 +2261,7 @@ body {
 /* Arabic */
 .prose-chat.lang-ar,
 .user-bubble.lang-ar {
-  font-family: "Noto Naskh Arabic", "Tajawal", "Cairo", "Amiri", system-ui, sans-serif;
+  font-family: var(--font-arabic-serif-stack);
   line-height: 1.95;
   letter-spacing: 0;
   text-align: start;
@@ -2391,7 +2391,7 @@ body {
    ============================================================ */
 html[dir="rtl"] .prose-chat.lang-ar,
 html[dir="rtl"] .user-bubble.lang-ar {
-  font-family: "Readex Pro", "Cairo", "Tajawal", "Noto Naskh Arabic", "Amiri", system-ui, sans-serif;
+  font-family: var(--font-arabic-ui-stack);
   font-feature-settings: "kern" 1, "liga" 1, "calt" 1, "ss01" 1;
   font-variant-numeric: proportional-nums;
   line-height: 2;
@@ -2416,7 +2416,7 @@ html[dir="rtl"] .prose-chat.lang-ar strong {
 html[dir="rtl"] .prose-chat.lang-ar h1,
 html[dir="rtl"] .prose-chat.lang-ar h2,
 html[dir="rtl"] .prose-chat.lang-ar h3 {
-  font-family: "Cairo", "Tajawal", "Readex Pro", system-ui, sans-serif;
+  font-family: var(--font-arabic-stack);
   font-weight: 800;
   letter-spacing: -0.005em;
   margin-top: 1.15em;
@@ -2526,7 +2526,7 @@ html[dir="rtl"] .prose-chat.lang-ar :is(code, kbd, samp) {
     sans-serif;
 }
 .prose-chat.lang-ar {
-  font-family: "Noto Naskh Arabic", "Tajawal", "Cairo", system-ui, sans-serif;
+  font-family: var(--font-arabic-serif-stack);
   line-height: 1.95;
 }
 
@@ -2634,7 +2634,7 @@ html[dir="rtl"] .prose-chat.lang-ar :is(code, kbd, samp) {
   line-height: 1.55 !important;
 }
 .user-bubble.lang-ar {
-  font-family: "Noto Naskh Arabic", "Tajawal", "Cairo", system-ui, sans-serif !important;
+  font-family: var(--font-arabic-serif-stack) !important;
   line-height: 1.85 !important;
 }
 .user-bubble strong {
