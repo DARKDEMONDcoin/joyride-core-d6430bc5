@@ -42,6 +42,7 @@ import { reportError, friendlyUserMessage, sanitizeErrorMessage } from "@/lib/er
 import { toast as sonnerToast } from "sonner";
 import { patchSupabaseAuth } from "@/integrations/supabase/patchAuth";
 import { installGlobalLinkPrefetch } from "@/lib/globalLinkPrefetch";
+import { installSpeculationRules } from "@/lib/speculationRules";
 import { installThemeColorSync } from "@/lib/themeColorSync";
 import { registerAppServiceWorker } from "@/lib/registerSW";
 import { installSnapshotCapture } from "@/lib/pageSnapshot";
@@ -112,6 +113,7 @@ const runIdle = (fn: () => void) => {
 };
 runIdle(() => {
   try { installGlobalLinkPrefetch(); } catch {}
+  try { installSpeculationRules(); } catch {}
   try { installThemeColorSync(); } catch {}
   try { registerAppServiceWorker(); } catch {}
   try { installSnapshotCapture(); } catch {}
