@@ -25,6 +25,8 @@ import { useSkills } from "@/hooks/useSkills";
 
 // State + side-effect hooks that drive ChatPage's enormous state graph.
 import { useUrlMode } from "./hooks/useUrlMode";
+import { prewarmSendPath } from "./lib/prewarmSendPath";
+
 import { useVideoFrames } from "./hooks/useVideoFrames";
 import { useShareDialog } from "./hooks/useShareDialog";
 import { useChatRename } from "./hooks/useChatRename";
