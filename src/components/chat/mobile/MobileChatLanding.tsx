@@ -780,38 +780,6 @@ const MobileChatLanding = ({
                 })()}
               </motion.h1>
             )}
-
-            {/* Starter prompts. The empty state used to be a single greeting in
-                the middle of a tall void, which reads as "nothing works yet".
-                Tappable openers give the screen a job and remove the blank-page
-                problem without adding another network request. */}
-            {!isReactive && (
-              <motion.ul
-                dir={isRtl ? "rtl" : "ltr"}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.32, ease: "easeOut", delay: 0.16 }}
-                className="w-full flex flex-col gap-2 mt-1"
-              >
-                {starterPrompts.map((s) => (
-                  <li key={s.id}>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        if (onSuggestionClick) onSuggestionClick(s);
-                        else onInputChange(s.label);
-                        taRef.current?.focus();
-                      }}
-                      className={`w-full rounded-2xl border border-white/[0.09] bg-white/[0.04] px-4 py-3 text-[13.5px] leading-snug text-white/80 transition-colors active:bg-white/[0.09] hover:bg-white/[0.07] ${
-                        isRtl ? "text-right" : "text-left"
-                      }`}
-                    >
-                      {s.label}
-                    </button>
-                  </li>
-                ))}
-              </motion.ul>
-            )}
           </div>
         </div>
 
