@@ -555,7 +555,7 @@ const MarkdownRenderer = ({
       br: () => <br />,
       img: ({ src, alt }) =>
         src ? (
-          <img
+          <img decoding="async"
             src={src}
             alt={alt || ""}
             loading="lazy"
@@ -651,7 +651,7 @@ const ReadersRow = ({
       <div className="flex -space-x-1.5">
         {readers.slice(0, 4).map((r) =>
           r.avatar ? (
-            <img
+            <img loading="lazy" decoding="async"
               key={r.user_id}
               src={r.avatar}
               alt={r.name || ""}
@@ -1090,7 +1090,7 @@ const ChatMessage = ({
       <div className="flex justify-start mb-6 gap-2.5 animate-message-rise">
         <div className="flex-shrink-0 mt-0.5">
           {senderAvatar ? (
-            <img
+            <img loading="lazy" decoding="async"
               src={senderAvatar}
               alt={senderName || ""}
               className="w-8 h-8 rounded-full object-cover"
@@ -1113,7 +1113,7 @@ const ChatMessage = ({
           {attachedImages && attachedImages.length > 0 && (
             <div className="flex gap-2 mb-2 flex-wrap">
               {attachedImages.map((img, i) => (
-                <img
+                <img loading="lazy" decoding="async"
                   key={i}
                   src={img}
                   alt=""
@@ -1152,7 +1152,7 @@ const ChatMessage = ({
             <div className="flex items-center gap-1.5 mb-1 justify-end pr-1">
               <span className="text-[11px] font-medium text-muted-foreground">{senderName}</span>
               {senderAvatar ? (
-                <img src={senderAvatar} alt="" className="w-4 h-4 rounded-full object-cover" />
+                <img loading="lazy" decoding="async" src={senderAvatar} alt="" className="w-4 h-4 rounded-full object-cover" />
               ) : (
                 <div className="w-4 h-4 rounded-full bg-foreground/10 flex items-center justify-center text-[8px] font-semibold text-foreground/70">
                   {senderName[0]?.toUpperCase()}
@@ -1163,7 +1163,7 @@ const ChatMessage = ({
           {attachedImages && attachedImages.length > 0 && (
             <div className="flex gap-2 mb-2 justify-end flex-wrap">
               {attachedImages.map((img, i) => (
-                <img
+                <img loading="lazy" decoding="async"
                   key={i}
                   src={img}
                   alt=""
@@ -1506,7 +1506,7 @@ const ChatMessage = ({
                 dedupImages.length > 0 && (
                   <div className="flex flex-col gap-3 mb-3 w-full max-w-[42rem]">
                     {dedupImages.map((img, i) => (
-                      <img
+                      <img decoding="async"
                         key={i}
                         src={img}
                         alt=""
@@ -1767,7 +1767,7 @@ const ChatMessage = ({
                         >
                           <div className="w-6 h-6 shrink-0 rounded-full bg-secondary/60 border border-border/40 flex items-center justify-center">
                             {getFavicon(link.url) && (
-                              <img
+                              <img loading="lazy" decoding="async"
                                 src={getFavicon(link.url)!}
                                 alt=""
                                 className="w-3.5 h-3.5 rounded-sm"

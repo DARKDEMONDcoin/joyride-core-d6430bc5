@@ -37,7 +37,7 @@ const TaskIcon = ({
   const src = resolveTaskIconSrc(task);
   if (!src) return <Gift className="h-4 w-4 text-white/70" strokeWidth={2} />;
   return (
-    <img
+    <img decoding="async"
       src={src}
       alt=""
       width={512}

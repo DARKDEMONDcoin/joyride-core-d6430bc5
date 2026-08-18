@@ -27,7 +27,7 @@ const SmartImage = ({ src, alt = "", className = "", loading = "lazy" }: Props) 
       {!loaded && (
         <div className="aspect-[16/9] w-full animate-pulse bg-gradient-to-br from-muted/60 to-muted/20" />
       )}
-      <img
+      <img decoding="async"
         src={src}
         alt={alt}
         loading={loading}

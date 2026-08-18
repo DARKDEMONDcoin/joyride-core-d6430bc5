@@ -58,7 +58,7 @@ const ImagePreviewModal = ({ url, alt, onClose }: ImagePreviewModalProps) => {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="relative w-full flex-1 min-h-0 flex items-center justify-center">
-              <img
+              <img loading="lazy" decoding="async"
                 src={url}
                 alt={alt || "Preview"}
                 className="max-w-full max-h-[78vh] rounded-2xl object-contain shadow-[0_30px_80px_-20px_rgba(0,0,0,0.8)]"

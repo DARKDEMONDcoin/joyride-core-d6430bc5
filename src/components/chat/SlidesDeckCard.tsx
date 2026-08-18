@@ -245,7 +245,7 @@ function SlideRender({
       {/* Cover background image */}
       {isCover && slide.image && (
         <>
-          <img
+          <img loading="lazy" decoding="async"
             src={slide.image}
             alt=""
             className="absolute inset-0 w-full h-full object-cover opacity-30"
@@ -272,7 +272,7 @@ function SlideRender({
           <div
             className={`w-[42%] h-full relative shrink-0 ${sideImageLeft ? "order-1" : "order-2"}`}
           >
-            <img src={slide.image} alt="" className="absolute inset-0 w-full h-full object-cover" />
+            <img loading="lazy" decoding="async" src={slide.image} alt="" className="absolute inset-0 w-full h-full object-cover" />
             <div
               className="absolute inset-0"
               style={{
@@ -450,7 +450,7 @@ function SlideRender({
                   className="aspect-square rounded-2xl overflow-hidden"
                   style={{ background: `${palette.fg}0d` }}
                 >
-                  <img src={u} alt="" className="w-full h-full object-cover" />
+                  <img loading="lazy" decoding="async" src={u} alt="" className="w-full h-full object-cover" />
                 </div>
               ))}
             </div>
@@ -625,7 +625,7 @@ const SlidesDeckCard = ({ deck, hideCard = false, autoOpen = false, onClose }: P
           style={{ background: deck.palette.bg }}
         >
           {cover?.image && (
-            <img
+            <img loading="lazy" decoding="async"
               src={cover.image}
               alt=""
               className="absolute inset-0 w-full h-full object-cover opacity-60 scale-110 group-hover:scale-100 transition-transform duration-1000"

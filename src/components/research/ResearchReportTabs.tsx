@@ -76,7 +76,7 @@ const ResearchReportTabs = ({
             <div className="hidden truncate text-xs text-foreground/50 sm:block max-w-[40%]">
               {s.url}
             </div>
-            <img
+            <img decoding="async"
               src={favicon(s.url)}
               alt=""
               className="h-7 w-7 shrink-0 rounded-full bg-foreground/10 object-cover"

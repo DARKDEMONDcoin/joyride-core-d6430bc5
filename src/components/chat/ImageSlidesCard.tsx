@@ -100,7 +100,7 @@ const ImageSlidesCard = ({ title, url, slideCount, chatName }: Props) => {
           }
         >
           {preview && (
-            <img
+            <img decoding="async"
               src={preview}
               alt={title}
               className="absolute inset-0 w-full h-full object-cover"
@@ -248,7 +248,7 @@ const PdfPreviewModal = ({ url, chatName, onClose }: ModalProps) => {
 
         <div ref={containerRef} className="flex flex-col items-center gap-5 py-4">
           {pages.map((src, i) => (
-            <img
+            <img loading="lazy" decoding="async"
               key={i}
               src={src}
               alt={`slide ${i + 1}`}

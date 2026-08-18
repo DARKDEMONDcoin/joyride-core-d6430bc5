@@ -338,7 +338,7 @@ export function OperatorWorkspace({
                 </div>
               ) : latestBrowser ? (
                 latestBrowser.match(/\.(png|jpg|jpeg|webp)$/i) ? (
-                  <img
+                  <img loading="lazy" decoding="async"
                     src={latestBrowser}
                     alt="browser screenshot"
                     className="w-full rounded border border-border/40"
@@ -370,7 +370,7 @@ export function OperatorWorkspace({
                         onClick={() => setPreviewImageUrl(s.url!)}
                         className="text-left"
                       >
-                        <img
+                        <img loading="lazy" decoding="async"
                           src={s.url!}
                           alt="Megsy OS screenshot"
                           className="w-full h-20 object-cover rounded border border-border/40 hover:opacity-80"

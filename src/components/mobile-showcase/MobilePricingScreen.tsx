@@ -254,7 +254,7 @@ export default function MobilePricingScreen({
           }}
         >
           <span className="inline-flex items-center gap-2 whitespace-nowrap align-baseline">
-            <img
+            <img loading="lazy" decoding="async"
               src={megsyLogo}
               alt="Megsy"
               className="inline-block h-[0.92em] w-auto -translate-y-[2px] select-none"

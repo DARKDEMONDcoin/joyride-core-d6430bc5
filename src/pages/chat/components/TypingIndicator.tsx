@@ -29,7 +29,7 @@ const TypingIndicatorImpl = ({ typingUsers, colorForUser }: TypingIndicatorProps
         {typingUsers.slice(0, 3).map((u) => {
           const c = colorForUser(u.id);
           return u.avatar ? (
-            <img
+            <img loading="lazy" decoding="async"
               key={u.id}
               src={u.avatar}
               alt=""

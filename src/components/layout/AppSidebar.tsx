@@ -919,7 +919,7 @@ const AppSidebar = ({
                   title={displayName}
                 >
                   {displayAvatar ? (
-                    <img src={displayAvatar} alt="" className="w-11 h-11 rounded-2xl object-cover" />
+                    <img loading="lazy" decoding="async" src={displayAvatar} alt="" className="w-11 h-11 rounded-2xl object-cover" />
                   ) : (
                     initial
                   )}
@@ -945,7 +945,7 @@ const AppSidebar = ({
                   title="Account settings"
                 >
                   {displayAvatar ? (
-                    <img
+                    <img loading="lazy" decoding="async"
                       src={displayAvatar}
                       alt=""
                       className="w-9 h-9 rounded-xl object-cover shrink-0"
@@ -1211,7 +1211,7 @@ const AppSidebar = ({
               {activeUserId && (
                 <div className="shrink-0">
                   {displayAvatar ? (
-                    <img
+                    <img loading="lazy" decoding="async"
                       src={displayAvatar}
                       alt=""
                       className="h-8 w-8 rounded-full object-cover"

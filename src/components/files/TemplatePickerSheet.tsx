@@ -147,7 +147,7 @@ const TemplatePickerSheet = ({ open, templates, selectedId, onSelect, onClose }:
                         style={{ borderBottom: `2px solid ${INK}`, ...fallbackStyle(t) }}
                       >
                         {t.preview && (
-                          <img
+                          <img decoding="async"
                             src={t.preview}
                             alt=""
                             loading="lazy"
@@ -293,7 +293,7 @@ const TemplatePickerSheet = ({ open, templates, selectedId, onSelect, onClose }:
                           style={{ borderBottom: `2px solid ${INK}`, ...fallbackStyle(t) }}
                         >
                           {t.preview && (
-                            <img
+                            <img decoding="async"
                               src={t.preview}
                               alt={t.name}
                               loading="lazy"

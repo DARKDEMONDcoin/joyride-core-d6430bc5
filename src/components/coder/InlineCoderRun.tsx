@@ -910,7 +910,7 @@ export default function InlineCoderRun({ runId, prompt, onClose, onFinish, previ
                               a.kind === "video" ? (
                                 <video src={a.url} className="h-full w-full object-cover" muted loop playsInline />
                               ) : (
-                                <img src={a.url} alt={a.prompt} loading="lazy" className="h-full w-full object-cover" />
+                                <img decoding="async" src={a.url} alt={a.prompt} loading="lazy" className="h-full w-full object-cover" />
                               )
                             ) : a.status === "error" ? (
                               <span className="px-2 text-center text-[10px] text-red-300">{a.error}</span>

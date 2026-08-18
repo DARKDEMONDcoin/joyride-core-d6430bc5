@@ -177,7 +177,7 @@ const SettingsPage = () => {
         >
           <div className="w-[92px] h-[92px] rounded-full overflow-hidden ring-2 ring-foreground/15 shadow-[0_8px_28px_rgba(0,0,0,0.45)]">
             {avatarUrl
-              ? <img src={avatarUrl} alt="" className="w-full h-full object-cover" />
+              ? <img loading="lazy" decoding="async" src={avatarUrl} alt="" className="w-full h-full object-cover" />
               : <OliveAvatar seed={userEmail || userName} className="w-full h-full" />}
           </div>
           <p className="mt-3 text-[18px] font-semibold tracking-tight">{userName}</p>

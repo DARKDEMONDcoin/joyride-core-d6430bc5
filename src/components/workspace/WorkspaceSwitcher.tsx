@@ -125,7 +125,7 @@ export default function WorkspaceSwitcher({ children, align = "start", side = "t
                   onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "transparent")}
                 >
                   {w.avatar_url ? (
-                    <img
+                    <img loading="lazy" decoding="async"
                       src={w.avatar_url}
                       alt=""
                       className="w-8 h-8 rounded-xl object-cover shrink-0"

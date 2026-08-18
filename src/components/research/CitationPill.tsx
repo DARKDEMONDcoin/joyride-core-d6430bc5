@@ -47,7 +47,7 @@ export const CitationPill = ({ n, url }: PillProps) => {
       </HoverCardTrigger>
       <HoverCardContent side="top" align="center" className="w-72 p-3">
         <div className="flex items-start gap-3">
-          <img
+          <img decoding="async"
             src={favicon(url)}
             alt=""
             className="mt-0.5 h-8 w-8 shrink-0 rounded-full bg-muted object-cover"

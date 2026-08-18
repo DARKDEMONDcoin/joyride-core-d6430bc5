@@ -168,7 +168,7 @@ export default function DocsArtifactCard({ artifactId, title, docType, html: inl
           aria-label="Open preview"
           className="relative block w-full aspect-[16/9] overflow-hidden bg-muted disabled:cursor-default"
         >
-          <img
+          <img decoding="async"
             src={oilPreviewCover}
             alt="Smooth oil-painted document preview cover"
             width={1200}

@@ -826,7 +826,7 @@ const AuthPage = () => {
         {/* Mobile top video with image fallback (hidden on desktop) */}
         <div className="lg:hidden relative w-full h-[38vh] shrink-0 overflow-hidden z-0">
           {/* Static fallback image behind the video — no intro flash before playback */}
-          <img
+          <img loading="lazy" decoding="async"
             src={`${AUTH_ASSET_BASE}/auth-mobile-fallback.webp`}
             alt=""
             aria-hidden="true"
@@ -883,7 +883,7 @@ const AuthPage = () => {
                     className="mb-4 lg:mb-8"
                   >
                     <div className="flex items-center gap-3 mb-2">
-                      <img
+                      <img loading="lazy" decoding="async"
                         src={megsyIconUrl}
                         alt="Megsy"
                         className="h-8 w-8 megsy-brand-logo"
@@ -1339,7 +1339,7 @@ const AuthPage = () => {
 
         {/* Right half — video background with image fallback (desktop only) */}
         <aside className="hidden lg:block lg:w-1/2 lg:min-h-dvh relative overflow-hidden">
-          <img
+          <img loading="lazy" decoding="async"
             src={`${AUTH_ASSET_BASE}/auth-mobile-fallback.webp`}
             alt=""
             className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${videoLoaded ? "opacity-0" : "opacity-100"}`}

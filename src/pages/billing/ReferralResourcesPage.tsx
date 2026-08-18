@@ -205,7 +205,7 @@ const ReferralResourcesPage = () => {
                   className="relative aspect-square w-full overflow-hidden"
                   style={{ backgroundColor: SURFACE_2 }}
                 >
-                  <img
+                  <img decoding="async"
                     src={it.asset.url}
                     alt={it.title}
                     loading="lazy"

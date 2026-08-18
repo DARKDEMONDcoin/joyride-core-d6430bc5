@@ -65,7 +65,7 @@ const SecuritySettingsPage = () => {
         <GlassSection title="Sign-in" index="01">
           <GlassCard>
             <GlassRow
-              icon={<img src={IOS26_ICONS.privacy} alt="" />}
+              icon={<img loading="lazy" decoding="async" src={IOS26_ICONS.privacy} alt="" />}
               label="Email"
               hint={userEmail || "Update primary email"}
               onClick={() => navigate("/settings/change-email")}
@@ -88,7 +88,7 @@ const SecuritySettingsPage = () => {
         <GlassSection title="Session" index="02">
           <GlassCard>
             <GlassRow
-              icon={<img src={IOS26_ICONS.logout} alt="" />}
+              icon={<img loading="lazy" decoding="async" src={IOS26_ICONS.logout} alt="" />}
               label="Sign out"
               danger
               onClick={handleLogout}

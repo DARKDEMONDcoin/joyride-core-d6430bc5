@@ -134,7 +134,7 @@ export function MobileServicePanelRenderer(p: MobileServicePanelRendererProps) {
                   >
                     {url ? (
                       <>
-                        <img
+                        <img loading="lazy" decoding="async"
                           src={url}
                           alt={slot === "start" ? "First frame" : "Last frame"}
                           className="absolute inset-0 w-full h-full object-cover"

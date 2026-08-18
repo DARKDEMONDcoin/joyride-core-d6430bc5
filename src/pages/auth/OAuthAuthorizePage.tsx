@@ -146,7 +146,7 @@ export default function OAuthAuthorizePage() {
             className="mx-auto mb-5 w-20 h-20 rounded-2xl bg-card border border-border shadow-sm flex items-center justify-center overflow-hidden"
           >
             {appInfo?.logo_url ? (
-              <img
+              <img loading="lazy" decoding="async"
                 src={appInfo.logo_url}
                 alt={appInfo.name}
                 className="w-full h-full object-cover rounded-2xl"

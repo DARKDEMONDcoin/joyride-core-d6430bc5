@@ -24,7 +24,7 @@ export default function SlidesTemplateButton({
     >
       <span className="w-6 h-6 rounded-full overflow-hidden border border-brand-ink bg-brand-ink shrink-0">
         {template.cover ? (
-          <img src={template.cover} alt="" loading="lazy" className="w-full h-full object-cover" />
+          <img decoding="async" src={template.cover} alt="" loading="lazy" className="w-full h-full object-cover" />
         ) : null}
       </span>
       <span className="truncate max-w-[140px]">{template.name}</span>

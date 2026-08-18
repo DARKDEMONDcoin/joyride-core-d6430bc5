@@ -24,7 +24,7 @@ export const MessageAvatar = React.forwardRef<HTMLDivElement, MessageAvatarProps
       )}
       {...props}
     >
-      {src ? <img src={src} alt={alt} className="w-full h-full object-cover" /> : fallback}
+      {src ? <img loading="lazy" decoding="async" src={src} alt={alt} className="w-full h-full object-cover" /> : fallback}
     </div>
   ),
 );

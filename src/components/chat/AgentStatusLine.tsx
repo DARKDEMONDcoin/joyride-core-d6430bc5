@@ -263,7 +263,7 @@ const ToolIcon = ({
   if (!meta) return <Wrench className="w-4 h-4 text-foreground/70 md:text-white/80" />;
   if (meta.slug && !failed) {
     return (
-      <img
+      <img loading="lazy" decoding="async"
         src={brandIconUrl(meta.slug)}
         alt=""
         className={"w-4 h-4 dark:invert md:invert " + (muted ? "opacity-50" : "opacity-90")}

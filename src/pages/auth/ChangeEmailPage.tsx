@@ -60,7 +60,7 @@ const ChangeEmailPage = () => {
         <GlassSection title="Current">
           <GlassCard>
             <GlassRow
-              icon={<img src={IOS26_ICONS.privacy} alt="" />}
+              icon={<img loading="lazy" decoding="async" src={IOS26_ICONS.privacy} alt="" />}
               label="Signed in as"
               hint={currentEmail || "—"}
               trailing={null}

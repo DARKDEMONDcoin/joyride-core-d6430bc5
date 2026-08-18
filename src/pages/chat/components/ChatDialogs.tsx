@@ -255,7 +255,7 @@ export function ChatDialogs(p: ChatDialogsProps) {
                   <div key={m.id} className="flex items-center gap-2 py-1">
                     <div className="relative">
                       {m.avatar ? (
-                        <img src={m.avatar} alt="" className="w-7 h-7 rounded-full object-cover" />
+                        <img loading="lazy" decoding="async" src={m.avatar} alt="" className="w-7 h-7 rounded-full object-cover" />
                       ) : (
                         <div
                           className="w-7 h-7 rounded-full flex items-center justify-center text-[11px] font-semibold text-foreground"

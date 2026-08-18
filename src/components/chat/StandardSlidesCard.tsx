@@ -117,7 +117,7 @@ const StandardSlidesCard = ({ title, url, colors, chatName }: Props) => {
         onClick={openPreview}
         className="slides-card-preview relative block w-full aspect-[16/9] overflow-hidden cursor-pointer group/preview"
       >
-        <img
+        <img loading="lazy" decoding="async"
           src={slidesCardCover}
           alt={title}
           className="w-full h-full object-cover"
