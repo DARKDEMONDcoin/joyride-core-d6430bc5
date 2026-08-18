@@ -1,3 +1,13 @@
+/* Route/theme stylesheets that are never needed for the first painted frame.
+   Loaded on idle from main.tsx, then cached locally by the service worker. */
+@import "./ios-glass.css";
+@import "./ios-feel.css";
+@import "./megsy-workspace.css";
+@import "./mobile-settings-theme.css";
+@import "./manus-theme.css";
+@import "./portfolio-referrals.css";
+@import "./about-hero.css";
+
 @tailwind utilities;
 
 /* ===========================================================
