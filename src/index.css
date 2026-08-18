@@ -3740,3 +3740,26 @@ html[data-theme="light"][data-theme="light"] .bg-black\/95 {
 html[data-theme="light"][data-theme="light"] .border-white\/10 {
   border-color: hsl(var(--border)) !important;
 }
+
+/* Horizontal chip strips (chat mode chips / mode bar) scroll past the viewport.
+   Without side padding and a soft edge fade the last chip is sliced flush
+   against the screen edge, which reads as a broken layout instead of
+   "there is more, keep scrolling". */
+.chips-edge-fade {
+  padding-inline: 12px;
+  scroll-padding-inline: 12px;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 14px,
+    #000 calc(100% - 24px),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 14px,
+    #000 calc(100% - 24px),
+    transparent 100%
+  );
+}
