@@ -469,23 +469,6 @@ const MobileChatLanding = ({
   void onModelSelect;
   void isPaid;
 
-  // Openers for the empty state — localized, no network, no icons to download.
-  const starterPrompts = useMemo<LandingSuggestion[]>(() => {
-    if (suggestions?.length) return suggestions.slice(0, 4);
-    return isRtl
-      ? [
-          { id: "s1", label: "اشرح لي فكرة معقدة بأسلوب بسيط" },
-          { id: "s2", label: "اكتب لي خطة عمل لمشروع صغير" },
-          { id: "s3", label: "لخّص لي هذا النص في نقاط" },
-          { id: "s4", label: "صمّم لي صورة لفكرة إعلانية" },
-        ]
-      : [
-          { id: "s1", label: "Explain a complex idea in simple words" },
-          { id: "s2", label: "Draft a launch plan for a small project" },
-          { id: "s3", label: "Summarize a long text into key points" },
-          { id: "s4", label: "Design an image for an ad idea" },
-        ];
-  }, [suggestions, isRtl]);
 
   const timeGreeting = useMemo(() => {
 
