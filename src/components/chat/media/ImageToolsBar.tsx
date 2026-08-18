@@ -133,7 +133,7 @@ export default function ImageToolsBar({ onAttach, onUseCharacter }: Props) {
                   className="flex-1 flex items-center gap-2 min-w-0 px-2 py-1.5 rounded-xl text-start hover:bg-foreground/[0.08] transition"
                 >
                   {c.refUrl ? (
-                    <img
+                    <img decoding="async"
                       src={c.refUrl}
                       alt=""
                       className="w-7 h-7 rounded-lg object-cover shrink-0"

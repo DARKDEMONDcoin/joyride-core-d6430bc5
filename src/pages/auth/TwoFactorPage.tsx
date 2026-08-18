@@ -192,7 +192,7 @@ const TwoFactorPage = () => {
                 <div style={{ display: "flex", flexDirection: "column", alignItems: "center", padding: 16 }}>
                   {qr && (
                     <div style={{ padding: 12, borderRadius: 20, background: "#fff" }}>
-                      <img src={qr} alt="2FA QR" width={200} height={200} />
+                      <img loading="lazy" decoding="async" src={qr} alt="2FA QR" width={200} height={200} />
                     </div>
                   )}
                   <p style={{ marginTop: 14, fontSize: 12, fontWeight: 500, color: "rgba(235,220,205,0.6)" }}>
@@ -321,7 +321,7 @@ const TwoFactorPage = () => {
               <div className="flex flex-col items-center">
                 {qr && (
                   <div className="p-3 rounded-xl bg-white">
-                    <img src={qr} alt="2FA QR" width={192} height={192} />
+                    <img loading="lazy" decoding="async" src={qr} alt="2FA QR" width={192} height={192} />
                   </div>
                 )}
                 <p className="mt-4 text-[11px] uppercase tracking-[0.14em] text-muted-foreground/80 font-medium">

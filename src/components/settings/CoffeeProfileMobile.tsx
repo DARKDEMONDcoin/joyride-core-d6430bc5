@@ -244,7 +244,7 @@ const CoffeeProfileMobile = () => {
                   {group.rows.map((row, rIdx) => {
                     const iconNode: ReactNode =
                       typeof row.icon === "string" ? (
-                        <img src={row.icon} alt="" className="cpm-row-icon cpm-row-icon-img" loading="lazy" />
+                        <img decoding="async" src={row.icon} alt="" className="cpm-row-icon cpm-row-icon-img" loading="lazy" />
                       ) : (
                         <row.icon className="cpm-row-icon" />
                       );

@@ -39,7 +39,7 @@ const BrandLogo = ({ integration, size = 28 }: { integration: Integration; size?
     );
   }
   return (
-    <img
+    <img decoding="async"
       src={url}
       alt=""
       width={size}

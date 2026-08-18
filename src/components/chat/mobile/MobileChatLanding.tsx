@@ -136,7 +136,7 @@ import { MEGSY_CHAT_MODEL_LABEL } from "@/lib/megsyModelDisplay";
 const MegsyIcon = () => {
   const logo = useBrandLogo();
   // Prefer configured Megsy logo but fall back to default if unset.
-  return <img src={logo || MEGSY_ICON_URL} alt="Megsy" className="w-full h-full object-contain" />;
+  return <img loading="lazy" decoding="async" src={logo || MEGSY_ICON_URL} alt="Megsy" className="w-full h-full object-contain" />;
 };
 
 export const DEFAULT_LANDING_MODELS: LandingModel[] = [
@@ -430,7 +430,7 @@ const BrandLogo = ({ id, className = "w-5 h-5" }: { id: string; className?: stri
   }
   const slug = SIMPLE_ICON_SLUGS[id] ?? id;
   return (
-    <img
+    <img decoding="async"
       src={`https://cdn.simpleicons.org/${slug}/ffffff`}
       alt=""
       className={`${className} object-contain`}

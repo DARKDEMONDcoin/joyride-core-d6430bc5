@@ -40,7 +40,7 @@ export const MentionDropdown = ({
             className="w-full flex items-center gap-2 px-3 py-2 hover:bg-accent text-left transition-colors"
           >
             {m.avatar ? (
-              <img src={m.avatar} alt="" className="w-6 h-6 rounded-full object-cover" />
+              <img loading="lazy" decoding="async" src={m.avatar} alt="" className="w-6 h-6 rounded-full object-cover" />
             ) : (
               <div
                 className="w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold text-foreground"

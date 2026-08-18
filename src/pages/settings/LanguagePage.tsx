@@ -48,7 +48,7 @@ function CartoonFlag({ code, size = 32 }: { code: string; size?: number }) {
         boxShadow: "0 3px 10px rgba(0,0,0,0.25)",
       }}
     >
-      <img
+      <img decoding="async"
         src={flagUrl(code)}
         alt=""
         loading="lazy"

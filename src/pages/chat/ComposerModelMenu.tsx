@@ -268,7 +268,7 @@ export default function ComposerModelMenu({
               hasBrandIcon(mediaModel?.name, mediaModel?.provider) ? (
                 <BrandIcon name={mediaModel?.name} provider={mediaModel?.provider} size={24} />
               ) : mediaModel?.thumbnail ? (
-                <img src={mediaModel.thumbnail} alt="" className="h-full w-full object-cover" />
+                <img loading="lazy" decoding="async" src={mediaModel.thumbnail} alt="" className="h-full w-full object-cover" />
               ) : mode === "video" ? (
                 <VideoIcon className="h-3.5 w-3.5 text-foreground/85" />
               ) : (
@@ -277,7 +277,7 @@ export default function ComposerModelMenu({
             ) : activeChatOption ? (
               <ComposerModelIcon brand={activeChatOption.brand} />
             ) : (
-              <img
+              <img loading="lazy" decoding="async"
                 src={megsyLogo}
                 alt=""
                 className="h-[68%] w-[68%] object-contain"
@@ -489,7 +489,7 @@ export default function ComposerModelMenu({
                                   {hasBrandIcon(choice.name, choice.provider) ? (
                                     <BrandIcon name={choice.name} provider={choice.provider} size={30} />
                                   ) : choice.thumbnail ? (
-                                    <img src={choice.thumbnail} alt="" className="h-full w-full object-cover" />
+                                    <img loading="lazy" decoding="async" src={choice.thumbnail} alt="" className="h-full w-full object-cover" />
                                   ) : (
                                     <ImageIcon className="h-4 w-4 text-foreground/60" />
                                   )}
@@ -545,7 +545,7 @@ export default function ComposerModelMenu({
                                   {hasBrandIcon(choice.name, choice.provider) ? (
                                     <BrandIcon name={choice.name} provider={choice.provider} size={30} />
                                   ) : choice.thumbnail ? (
-                                    <img src={choice.thumbnail} alt="" className="h-full w-full object-cover" />
+                                    <img loading="lazy" decoding="async" src={choice.thumbnail} alt="" className="h-full w-full object-cover" />
                                   ) : (
                                     <VideoIcon className="h-4 w-4 text-foreground/60" />
                                   )}
@@ -727,7 +727,7 @@ export default function ComposerModelMenu({
                                         <BrandIcon name={choice.name} provider={choice.provider} size={28} />
                                         {!hasBrandIcon(choice.name, choice.provider) &&
                                           (choice.thumbnail ? (
-                                            <img src={choice.thumbnail} alt="" className="h-full w-full object-cover" />
+                                            <img loading="lazy" decoding="async" src={choice.thumbnail} alt="" className="h-full w-full object-cover" />
                                           ) : mode === "video" ? (
                                             <VideoIcon className="h-4 w-4 text-white/80" />
                                           ) : (

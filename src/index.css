@@ -1,14 +1,13 @@
 /* Google fonts are loaded asynchronously from index.html (non render-blocking).
-   Keeping an @import here would block first paint on every page. */
-@import "./styles/ios-glass.css";
-@import "./styles/ios-feel.css";
-@import "./styles/megsy-workspace.css";
-@import "./styles/mobile-settings-theme.css";
-@import "./styles/manus-theme.css";
-@import "./styles/portfolio-referrals.css";
-@import "./styles/about-hero.css";
+   Keeping an @import here would block first paint on every page.
+
+   Route-specific themes (ios-glass, ios-feel, megsy-workspace,
+   mobile-settings-theme, manus-theme, portfolio-referrals, about-hero) moved to
+   styles/deferred.css — they are fetched once after first paint and then served
+   from the service-worker cache, so they never block the first frame. */
 @import "./styles/page-transitions.css";
 @import "./styles/landing-typography.css";
+
 
 @tailwind base;
 @tailwind components;

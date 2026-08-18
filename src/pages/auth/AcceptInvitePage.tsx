@@ -124,7 +124,7 @@ export default function AcceptInvitePage() {
         <div className="flex flex-col items-center text-center space-y-4">
           <div className="relative">
             {details.inviter_avatar ? (
-              <img
+              <img loading="lazy" decoding="async"
                 src={details.inviter_avatar}
                 alt={inviterName}
                 className="w-16 h-16 rounded-full object-cover border-2 border-background shadow-sm"

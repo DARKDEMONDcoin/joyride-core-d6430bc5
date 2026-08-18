@@ -124,14 +124,14 @@ export default function MediaModelPickerSheet({
                     {hasBrandIcon(m.name, m.provider) ? (
                       <BrandIcon name={m.name} provider={m.provider} size={64} variant="color" />
                     ) : m.thumbnailUrl ? (
-                      <img
+                      <img decoding="async"
                         src={m.thumbnailUrl}
                         alt={m.name}
                         loading="lazy"
                         className="w-full h-full object-cover"
                       />
                     ) : (
-                      <img
+                      <img loading="lazy" decoding="async"
                         src={megsyIcon}
                         alt="Megsy"
                         className="w-14 h-14 object-contain"
@@ -143,7 +143,7 @@ export default function MediaModelPickerSheet({
                       {hasBrandIcon(m.name, m.provider) ? (
                         <BrandIcon name={m.name} provider={m.provider} size={16} variant="color" className="shrink-0" />
                       ) : (
-                        <img src={megsyIcon} alt="" className="w-4 h-4 shrink-0 object-contain" />
+                        <img loading="lazy" decoding="async" src={megsyIcon} alt="" className="w-4 h-4 shrink-0 object-contain" />
                       )}
                       <div className="font-black text-sm truncate text-foreground">
                         {m.name}

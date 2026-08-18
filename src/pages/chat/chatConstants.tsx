@@ -375,7 +375,7 @@ export const ComposerModelIcon = ({
   if (brand === "glm") return <Zhipu.Color size={18} />;
   if (brand === "kimi") return <Kimi.Color size={18} />;
   return (
-    <img
+    <img decoding="async"
       src={megsyLogo}
       alt="Megsy"
       className="w-[18px] h-[18px] object-contain"

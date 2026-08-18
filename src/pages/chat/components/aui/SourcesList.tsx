@@ -68,7 +68,7 @@ export function SourcesList({ sources }: { sources: SourceItem[] }) {
           rel="noopener noreferrer"
           className="group flex items-start gap-2 rounded-xl border border-white/10 bg-background/40 p-2 hover:bg-white/5 transition-colors text-[12px]"
         >
-          <img
+          <img decoding="async"
             src={s.favicon}
             alt=""
             className="w-4 h-4 rounded-sm mt-0.5 shrink-0"

@@ -22,7 +22,7 @@ function ComposerAttachments({ files, onRemove }: Props) {
           className="flex items-center gap-2 px-3 py-1.5 rounded-lg liquid-glass-button text-xs text-foreground shrink-0"
         >
           {f.type === "image" ? (
-            <img src={f.data} alt="" className="w-8 h-8 rounded object-cover" />
+            <img loading="lazy" decoding="async" src={f.data} alt="" className="w-8 h-8 rounded object-cover" />
           ) : f.type === "video" ? (
             <VideoIcon className="w-3 h-3" />
           ) : (

@@ -60,7 +60,7 @@ function AppLogo({ integration, size = 56 }: { integration: Integration; size?: 
     );
   }
   return (
-    <img
+    <img decoding="async"
       src={url}
       alt=""
       width={size}

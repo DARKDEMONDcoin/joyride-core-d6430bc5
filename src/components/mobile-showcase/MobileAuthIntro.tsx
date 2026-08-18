@@ -122,7 +122,7 @@ export default function MobileAuthIntro({
       style={{ fontFamily: 'Inter, -apple-system, "SF Pro Text", system-ui, sans-serif', touchAction: "manipulation" }}
     >
       {/* Hero video */}
-      <img
+      <img loading="lazy" decoding="async"
         src={`${AUTH_ASSET_BASE}/auth-mobile-fallback.webp`}
         alt=""
         aria-hidden="true"

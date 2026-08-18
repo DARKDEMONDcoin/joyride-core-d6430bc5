@@ -178,7 +178,7 @@ export default function ArtifactCanvas({
               <TabsContent value="media" className="m-0 min-h-0 flex-1 overflow-auto p-4">
                 <div className="grid gap-3 sm:grid-cols-2">
                   {images.map((src, i) => (
-                    <img key={`${src}-${i}`} src={src} alt="" className="w-full rounded-md border border-border bg-muted object-contain" />
+                    <img loading="lazy" decoding="async" key={`${src}-${i}`} src={src} alt="" className="w-full rounded-md border border-border bg-muted object-contain" />
                   ))}
                 </div>
               </TabsContent>

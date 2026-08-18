@@ -102,7 +102,7 @@ export function DesktopSettingsHome() {
       <section className="flex flex-col items-center pt-4">
         <div className="h-[104px] w-[104px] rounded-full overflow-hidden ring-2 ring-white/20 shadow-[0_18px_50px_-12px_rgba(0,0,0,0.7)]">
           {avatarUrl ? (
-            <img src={avatarUrl} alt="" className="h-full w-full object-cover" />
+            <img loading="lazy" decoding="async" src={avatarUrl} alt="" className="h-full w-full object-cover" />
           ) : (
             <OliveAvatar seed={userEmail || userName} className="h-full w-full" />
           )}

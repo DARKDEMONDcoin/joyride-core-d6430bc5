@@ -985,7 +985,7 @@ const PlusIntegrationsBody = (p: PlusContentProps) => (
           >
             <div className="relative w-9 h-9 flex items-center justify-center overflow-visible rounded-lg bg-foreground/10 border border-foreground/15">
               {it.domain && !logoBroken ? (
-                <img
+                <img loading="lazy" decoding="async"
                   src={`https://www.google.com/s2/favicons?domain=${it.domain}&sz=64`}
                   alt=""
                   className="w-6 h-6 object-contain"

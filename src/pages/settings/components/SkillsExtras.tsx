@@ -24,7 +24,7 @@ export function SkillsHeroGlassCard({ onTry }: { onTry: () => void }) {
         }}
       />
       <div className="relative flex flex-col items-center px-5 pt-5 pb-6">
-        <img
+        <img decoding="async"
           src={skillsHero}
           alt=""
           loading="lazy"
