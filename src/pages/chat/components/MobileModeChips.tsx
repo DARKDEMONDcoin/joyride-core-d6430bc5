@@ -128,23 +128,10 @@ export function MobileModeChips({
           className={`flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-1 ${
             isDesktopChat
               ? "w-full gap-2 px-1 md:overflow-x-auto md:flex-nowrap md:justify-start"
-              : "w-full px-3 justify-start flex-nowrap scroll-px-3 snap-x"
+              : "w-full justify-start flex-nowrap chips-edge-fade"
           }`}
-          // The strip is wider than the viewport on mobile, and previously the
-          // last chip was sliced off flush against the screen edge with no hint
-          // that more existed. A soft edge fade + real side padding makes the
-          // overflow legible instead of looking like a rendering bug.
-          style={{
-            scrollbarWidth: "none",
-            ...(isDesktopChat
-              ? null
-              : {
-                  maskImage:
-                    "linear-gradient(to right, transparent 0, #000 14px, #000 calc(100% - 22px), transparent 100%)",
-                  WebkitMaskImage:
-                    "linear-gradient(to right, transparent 0, #000 14px, #000 calc(100% - 22px), transparent 100%)",
-                }),
-          }}
+          style={{ scrollbarWidth: "none" }}
+
 
         >
           {CHIPS.map(({ id, label, Icon }, index) => {
