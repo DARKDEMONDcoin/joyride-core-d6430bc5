@@ -769,6 +769,12 @@ button[data-slides-preview-button] svg,
     --sidebar-ring: 240 4% 50%;
     --font-display: "Space Grotesk", sans-serif;
     --font-body: "Inter", sans-serif;
+    /* Safe defaults so the Arabic stacks resolve even before
+       styles/font-fallback.css (which adds the metric-matched fallback faces)
+       has been applied. Same families, no metric override. */
+    --font-arabic-stack: "Cairo", "Tajawal", "Readex Pro", system-ui, sans-serif;
+    --font-arabic-serif-stack: "Noto Naskh Arabic", "Tajawal", "Cairo", system-ui, sans-serif;
+    --font-arabic-ui-stack: "Readex Pro", "Cairo", "Tajawal", "Noto Naskh Arabic", system-ui, sans-serif;
   }
 
   /* Noir & Gold — deep black with warm gold accents */
