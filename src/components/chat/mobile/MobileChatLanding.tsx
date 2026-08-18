@@ -469,7 +469,26 @@ const MobileChatLanding = ({
   void onModelSelect;
   void isPaid;
 
+  // Openers for the empty state — localized, no network, no icons to download.
+  const starterPrompts = useMemo<LandingSuggestion[]>(() => {
+    if (suggestions?.length) return suggestions.slice(0, 4);
+    return isRtl
+      ? [
+          { id: "s1", label: "اشرح لي فكرة معقدة بأسلوب بسيط" },
+          { id: "s2", label: "اكتب لي خطة عمل لمشروع صغير" },
+          { id: "s3", label: "لخّص لي هذا النص في نقاط" },
+          { id: "s4", label: "صمّم لي صورة لفكرة إعلانية" },
+        ]
+      : [
+          { id: "s1", label: "Explain a complex idea in simple words" },
+          { id: "s2", label: "Draft a launch plan for a small project" },
+          { id: "s3", label: "Summarize a long text into key points" },
+          { id: "s4", label: "Design an image for an ad idea" },
+        ];
+  }, [suggestions, isRtl]);
+
   const timeGreeting = useMemo(() => {
+
     const h = new Date().getHours();
     if (h < 5) return "Good night";
     if (h < 12) return "Good morning";
@@ -725,7 +744,7 @@ const MobileChatLanding = ({
         className="absolute inset-0 overflow-y-auto overflow-x-hidden overscroll-contain touch-pan-y pt-[max(env(safe-area-inset-top),16px)] px-5"
         style={{ color: "#F5F5F7" }}
       >
-        <div className="min-h-[calc(100dvh-220px)] flex flex-col items-center justify-center text-center">
+        <div className="min-h-[calc(100dvh-260px)] flex flex-col items-center justify-center text-center pb-6">
           <div className="flex flex-col items-center justify-center gap-5 w-full max-w-sm">
             {!isReactive && (
               <div aria-hidden>
@@ -761,8 +780,41 @@ const MobileChatLanding = ({
                 })()}
               </motion.h1>
             )}
+
+            {/* Starter prompts. The empty state used to be a single greeting in
+                the middle of a tall void, which reads as "nothing works yet".
+                Tappable openers give the screen a job and remove the blank-page
+                problem without adding another network request. */}
+            {!isReactive && (
+              <motion.ul
+                dir={isRtl ? "rtl" : "ltr"}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.32, ease: "easeOut", delay: 0.16 }}
+                className="w-full flex flex-col gap-2 mt-1"
+              >
+                {starterPrompts.map((s) => (
+                  <li key={s.id}>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        if (onSuggestionClick) onSuggestionClick(s);
+                        else onInputChange(s.label);
+                        taRef.current?.focus();
+                      }}
+                      className={`w-full rounded-2xl border border-white/[0.09] bg-white/[0.04] px-4 py-3 text-[13.5px] leading-snug text-white/80 transition-colors active:bg-white/[0.09] hover:bg-white/[0.07] ${
+                        isRtl ? "text-right" : "text-left"
+                      }`}
+                    >
+                      {s.label}
+                    </button>
+                  </li>
+                ))}
+              </motion.ul>
+            )}
           </div>
         </div>
+
       </div>
 
 

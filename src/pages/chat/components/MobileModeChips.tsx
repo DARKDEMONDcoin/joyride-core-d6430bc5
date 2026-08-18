@@ -128,9 +128,11 @@ export function MobileModeChips({
           className={`flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-1 ${
             isDesktopChat
               ? "w-full gap-2 px-1 md:overflow-x-auto md:flex-nowrap md:justify-start"
-              : "w-full px-1 justify-start flex-nowrap"
+              : "w-full justify-start flex-nowrap chips-edge-fade"
           }`}
           style={{ scrollbarWidth: "none" }}
+
+
         >
           {CHIPS.map(({ id, label, Icon }, index) => {
             const active = activeId === id;

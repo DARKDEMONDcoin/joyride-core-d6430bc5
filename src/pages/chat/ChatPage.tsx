@@ -25,6 +25,8 @@ import { useSkills } from "@/hooks/useSkills";
 
 // State + side-effect hooks that drive ChatPage's enormous state graph.
 import { useUrlMode } from "./hooks/useUrlMode";
+import { prewarmSendPath } from "./lib/prewarmSendPath";
+
 import { useVideoFrames } from "./hooks/useVideoFrames";
 import { useShareDialog } from "./hooks/useShareDialog";
 import { useChatRename } from "./hooks/useChatRename";
@@ -1456,27 +1458,31 @@ const ChatPage = () => {
     const hasFrames = chatMode === "video" && videoStartEndMode && !!startFrameUrl && !!endFrameUrl;
     if (!text.trim() && attachedFiles.length === 0 && !hasFrames) return;
     if (isLoading || isSubmittingRef.current) return;
-    // Fire-and-forget streak bump — pure client, no network. Milestones emit
-    // a global event so any listener (badge, confetti) can react.
-    try {
-      const [{ bumpStreak }, { track }] = await Promise.all([
-        import("@/lib/streaks"),
-        import("@/lib/achievements"),
-      ]);
-      // Track every send for achievement counters (first_chat, chatty_N, time-of-day, polyglot).
+    // Streak/achievement bookkeeping is telemetry, not part of the send path.
+    // It used to be `await`ed here, which meant the user's own bubble could not
+    // render until two lazy chunks finished downloading — the single biggest
+    // cause of "the first message takes seconds to appear". Now it runs
+    // detached so the UI reacts on the same frame as the tap.
+    void (async () => {
       try {
-        const lang = (typeof navigator !== "undefined" && navigator.language) || "en";
-        track("message_sent", { lang: lang.split("-")[0] });
-      } catch {}
-      // Feature-specific unlocks based on the current chat mode.
-      try {
-        if (chatMode === "images") track("image_generated");
-        else if (chatMode === "deep-research") track("research_started");
-        else if (chatMode === "code") track("code_ran");
-        else if (chatMode === "slides" || chatMode === "slides-images") track("slides_created");
-      } catch {}
-      bumpStreak();
-    } catch { /* non-fatal */ }
+        const [{ bumpStreak }, { track }] = await Promise.all([
+          import("@/lib/streaks"),
+          import("@/lib/achievements"),
+        ]);
+        try {
+          const lang = (typeof navigator !== "undefined" && navigator.language) || "en";
+          track("message_sent", { lang: lang.split("-")[0] });
+        } catch {}
+        try {
+          if (chatMode === "images") track("image_generated");
+          else if (chatMode === "deep-research") track("research_started");
+          else if (chatMode === "code") track("code_ran");
+          else if (chatMode === "slides" || chatMode === "slides-images") track("slides_created");
+        } catch {}
+        bumpStreak();
+      } catch { /* non-fatal */ }
+    })();
+
     // Guard: oversized prompts are almost always a paste accident — refuse
     // early with a clear message instead of letting the request fail server-side.
     if (text.length > MAX_CHAT_MESSAGE_CHARS) {
@@ -2231,6 +2237,13 @@ const ChatPage = () => {
   });
 
   const handleSend = () => handleSendWithText();
+
+  // Warm the modules the send path imports so the FIRST send is as fast as
+  // every later one (see prewarmSendPath docs).
+  useEffect(() => {
+    prewarmSendPath();
+  }, []);
+
 
   // After signup, auto-send the prompt the user typed on the landing page.
   usePostSignupPrompt(handleSendWithText);

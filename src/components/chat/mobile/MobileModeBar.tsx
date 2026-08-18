@@ -73,8 +73,10 @@ export default function MobileModeBar({ mode, onChange }: Props) {
     <div
       data-testid="mobile-mode-bar"
       dir="ltr"
-      className="flex items-center gap-2 overflow-x-auto no-scrollbar pl-2 pr-2 pb-2.5 min-h-[40px] [scroll-padding-inline:0.5rem]"
+      className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-2.5 min-h-[40px] chips-edge-fade"
       style={{ WebkitOverflowScrolling: "touch", scrollSnapType: "x proximity" }}
+
+
     >
       <AnimatePresence mode="popLayout" initial={false}>
         {activeMode ? (
