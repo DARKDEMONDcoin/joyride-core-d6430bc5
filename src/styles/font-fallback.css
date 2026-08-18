@@ -39,9 +39,56 @@
   line-gap-override: 0%;
 }
 
+/* ── Arabic / RTL fallbacks ───────────────────────────────────────────────
+   CLS risk is structurally higher for Arabic than Latin: the vertical metrics
+   (ascent/descent/line-gap) and average glyph width of an Arabic webfont differ
+   far more from a Latin system fallback than two Latin faces do from each other.
+   These synthetic faces make the fallback occupy the same box as the pending
+   webfont so the swap is metric-neutral.
+   Ref: https://developer.chrome.com/blog/font-fallbacks */
+
+@font-face {
+  font-family: "Cairo Fallback";
+  src: local("Arial");
+  size-adjust: 106%;
+  ascent-override: 96%;
+  descent-override: 32%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Tajawal Fallback";
+  src: local("Arial");
+  size-adjust: 104%;
+  ascent-override: 95%;
+  descent-override: 30%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Readex Pro Fallback";
+  src: local("Arial");
+  size-adjust: 105%;
+  ascent-override: 98%;
+  descent-override: 30%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Noto Naskh Arabic Fallback";
+  src: local("Arial");
+  size-adjust: 112%;
+  ascent-override: 104%;
+  descent-override: 36%;
+  line-gap-override: 0%;
+}
+
 /* Apply the fallback ahead of the webfont so the swap is metric-identical. */
 :root {
   --font-inter-stack: "Inter", "Inter Fallback", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-grotesk-stack: "Space Grotesk", "Space Grotesk Fallback", "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
   --font-dm-stack: "DM Sans", "DM Sans Fallback", "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --font-arabic-stack: "Cairo", "Cairo Fallback", "Tajawal", "Tajawal Fallback", system-ui, sans-serif;
+  --font-arabic-serif-stack: "Noto Naskh Arabic", "Noto Naskh Arabic Fallback", "Tajawal", "Tajawal Fallback", "Cairo", system-ui, sans-serif;
+  --font-arabic-ui-stack: "Readex Pro", "Readex Pro Fallback", "Cairo", "Cairo Fallback", "Tajawal", system-ui, sans-serif;
 }

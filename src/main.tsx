@@ -113,6 +113,7 @@ const runIdle = (fn: () => void) => {
 };
 runIdle(() => {
   try { installGlobalLinkPrefetch(); } catch {}
+  try { installSpeculationRules(); } catch {}
   try { installThemeColorSync(); } catch {}
   try { registerAppServiceWorker(); } catch {}
   try { installSnapshotCapture(); } catch {}
