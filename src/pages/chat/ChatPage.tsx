@@ -2236,6 +2236,13 @@ const ChatPage = () => {
 
   const handleSend = () => handleSendWithText();
 
+  // Warm the modules the send path imports so the FIRST send is as fast as
+  // every later one (see prewarmSendPath docs).
+  useEffect(() => {
+    prewarmSendPath();
+  }, []);
+
+
   // After signup, auto-send the prompt the user typed on the landing page.
   usePostSignupPrompt(handleSendWithText);
 
