@@ -399,9 +399,25 @@
 
   [data-skin="claude"] [data-chips-row] [data-no-swipe-open] {
     gap: 0.45rem !important;
-    padding: 0.15rem 0.1rem 0.25rem !important;
-    mask-image: none !important;
+    padding: 0.15rem 0.75rem 0.25rem !important;
+    /* Soft edge fade so the overflowing last chip reads as "scroll for more"
+       instead of a chip sliced flush against the screen edge. */
+    mask-image: linear-gradient(
+      to right,
+      transparent 0,
+      #000 14px,
+      #000 calc(100% - 24px),
+      transparent 100%
+    ) !important;
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0,
+      #000 14px,
+      #000 calc(100% - 24px),
+      transparent 100%
+    ) !important;
   }
+
 }
 
 /* User preference: + and model selector triggers must stay text/icon-only. */
