@@ -73,17 +73,9 @@ export default function MobileModeBar({ mode, onChange }: Props) {
     <div
       data-testid="mobile-mode-bar"
       dir="ltr"
-      className="flex items-center gap-2 overflow-x-auto no-scrollbar pl-3 pr-3 pb-2.5 min-h-[40px] [scroll-padding-inline:0.75rem]"
-      // Soft edge fade: the row scrolls past the viewport, and a hard slice at
-      // the screen edge reads as a broken layout rather than "scroll for more".
-      style={{
-        WebkitOverflowScrolling: "touch",
-        scrollSnapType: "x proximity",
-        maskImage:
-          "linear-gradient(to right, transparent 0, #000 14px, #000 calc(100% - 24px), transparent 100%)",
-        WebkitMaskImage:
-          "linear-gradient(to right, transparent 0, #000 14px, #000 calc(100% - 24px), transparent 100%)",
-      }}
+      className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-2.5 min-h-[40px] chips-edge-fade"
+      style={{ WebkitOverflowScrolling: "touch", scrollSnapType: "x proximity" }}
+
 
     >
       <AnimatePresence mode="popLayout" initial={false}>
